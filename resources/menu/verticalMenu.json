@@ -1,0 +1,78 @@
+{
+  "menu": [
+    {
+      "menuHeader": "At Glance"
+    },
+    {
+      "name": "Dashboards",
+      "icon": "menu-icon tf-icons ti ti-smart-home",
+      "slug": "dashboard",
+      "url": "admin/dashboard"
+    },
+    {
+      "menuHeader": "Content"
+    },
+    {
+      "name": "Clients",
+      "icon": "menu-icon tf-icons ti ti-users",
+      "slug": "clients",
+      "submenu": [
+        {
+          "url": "/admin/clients",
+          "name": "Clients",
+          "slug": "clients-list"
+        },
+        {
+          "url": "/admin/clients/new",
+          "name": "New Client",
+          "slug": "clients-new"
+        }
+      ]
+    },
+    {
+      "name": "Loans",
+      "icon": "menu-icon tf-icons ti ti-brand-php",
+      "slug": "loans",
+      "submenu": [
+        {
+          "url": "/admin/loans",
+          "name": "Individual Loans",
+          "slug": "loans-list"
+        }
+       
+      ]
+    },
+    {
+      "name": "Loan Products",
+      "icon": "menu-icon tf-icons ti ti-file",
+      "slug": "loan-products",
+      "url": "admin/loan-products"
+    },
+    {
+      "menuHeader": "Settings"
+    },
+    {
+      "name": "System Settings",
+      "icon": "menu-icon tf-icons ti ti-settings",
+      "slug": "setting",
+      "submenu": [
+        {
+          "url": "admin/theme-setting",
+          "name": "Theme Setting",
+          "slug": "setting-theme"
+        },
+        {
+          "url": "admin/company-setting",
+          "name": "Company Settings",
+          "slug": "setting-company"
+        },
+        {
+          "url": "admin/branches",
+          "name": "Company Branches",
+          "slug": "setting-branches"
+        }
+      ]
+      
+    }
+  ]
+  }
