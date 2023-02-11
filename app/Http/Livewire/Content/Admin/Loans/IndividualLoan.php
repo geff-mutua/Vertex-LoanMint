@@ -52,9 +52,9 @@ class IndividualLoan extends Component
     #Sumamry
     public $summations=[
         'active'=>0,
-        'pending'=>0,
         'rejected'=>0,
-        'approved'=>0,
+        'arrears'=>0,
+        'paid'=>0,
     ];
 
     public function mount(){

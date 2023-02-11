@@ -58,11 +58,11 @@
                                     <input name="customRadioTemp" class="form-check-input" type="radio" value=""
                                         id="customRadioTemp2" />
                                     <span class="custom-option-header">
-                                        <span class="h6 mb-0">Pending Approvals</span>
+                                        <span class="h6 mb-0">Paid Loans</span>
 
                                     </span>
                                     <span class="custom-option-body">
-                                        <small>Ksh {{ number_format($summations['pending']) }}</small>
+                                        <small>Ksh {{ number_format($summations['paid']) }}</small>
                                     </span>
                                 </label>
                             </div>
@@ -88,11 +88,11 @@
                                     <input name="customRadioTemp" class="form-check-input" type="radio" value=""
                                         id="customRadioTemp2" />
                                     <span class="custom-option-header">
-                                        <span class="h6 mb-0">Approved</span>
+                                        <span class="h6 mb-0">Loans In Arrears</span>
 
                                     </span>
                                     <span class="custom-option-body">
-                                        <small>Ksh {{ number_format($summations['approved']) }}</small>
+                                        <small>Ksh {{ number_format($summations['arrears']) }}</small>
                                     </span>
                                 </label>
                             </div>

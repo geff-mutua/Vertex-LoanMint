@@ -48,8 +48,9 @@
                             <label  class="form-label">Associated Loan</label>
                             <select class="form-control" wire:model="loan_id" id="">
                                 <option value="">--select--</option>
-
+                                @if( $loan->status !="Rejected")
                                 <option value="{{ $loan->id }}">{{ $loan->transaction_code }}</option>
+                                @endif
 
                             </select>
                             @error('loan_id')

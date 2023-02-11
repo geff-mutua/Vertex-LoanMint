@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('msisdn');
             $table->timestamp('date');
             $table->string('payment_option');
-           
+            $table->string('account_id')->nullable();
             $table->foreignId('loan_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->boolean('status')->default(0); //0=>unapproved 1=Approved 2=Rejected
             $table->string('business_balance')->nullable();

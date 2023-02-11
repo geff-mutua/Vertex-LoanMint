@@ -34,7 +34,7 @@
                             <h5 class="card-title mb-0">{{ $borrower->fullname() }}! 🎉</h5>
                             <p class="mb-2">Current Loan Balance</p>
                             <h4 class="text-primary mb-1">Ksh {{ 
-                                number_format($borrower->loan->last()->first()->statement()->latest()->first() ?$borrower->loan->last()->first()->statement()->latest()->first()->balance:0,
+                                number_format(count($borrower->loan) >0 ?$borrower->loan->last()->first()->statement()->latest()->first()?$borrower->loan->last()->first()->statement()->latest()->first()->balance:0:0,
                                 2) }}</h4>
                             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exLargeModal">
                                 All Loans
@@ -69,9 +69,9 @@
                                         class="ti ti-chart-pie-2 ti-sm"></i></div>
                                 <div class="card-info">
                                     <h5 class="mb-0">{{ 
-                                        number_format($borrower->loan->last()->first()?$borrower->loan->last()->first()->total:0,
+                                        number_format(count($borrower->loan)>0?$borrower->loan->last()->first()->total:0,
                                         2) }}</h5>
-                                    <small>{{$borrower->loan->last()->first()?$borrower->loan->last()->first()->status:''}}</small>
+                                    <small>{{count($borrower->loan)>0?$borrower->loan->last()->first()->status:''}}</small>
                                 </div>
                             </div>
                         </div>
@@ -101,7 +101,7 @@
                                         class="ti ti-currency-dollar ti-sm"></i></div>
                                 <div class="card-info">
                                     <h5 class="mb-0">Ksh {{ 
-                                        number_format($borrower->loan->last()->first()->statement()->latest()->first() ?$borrower->loan->last()->first()->statement()->latest()->first()->balance:0,
+                                        number_format(count($borrower->loan) >0 ?$borrower->loan->last()->first()->statement()->latest()->first()?$borrower->loan->last()->first()->statement()->latest()->first()->balance:0:0,
                                         2) }}</h5>
                                     <small> Balance</small>
                                 </div>
@@ -119,7 +119,7 @@
                 <div class="col-xl-6 mb-4 col-md-3 col-6">
                     <div class="card">
                         <div class="card-header pb-0">
-                            <h5 class="card-title mb-0">{{ number_format($borrower->loan->last()->first()?$borrower->loan->last()->first()->statement()->where('action','Loan Repayment')->sum('amount'):0
+                            <h5 class="card-title mb-0">{{ number_format(count($borrower->loan)>0?$borrower->loan->last()->first()->statement()->where('action','Loan Repayment')->sum('amount'):0
                                 ,2)}}</h5>
                             <small class="text-muted">Repayment</small>
                         </div>
@@ -249,7 +249,7 @@
                                 @if($value->status=='Pending')
                                 <a href="javascript:void(0)" wire:click="editLoan({{$value->id}})"
                                     data-bs-toggle="modal" data-bs-target="#editLoan{{$value->id}}">
-                                    <small class="text-xs text-warning"><b>edit</b></small>
+                                    <small class="text-xs text-warning"><i class="fa fa-edit" title="Edit this loan"></i></small>
                                 </a>
                                 |
                                 @endif
@@ -280,9 +280,9 @@
                                 @endif
                                 @endif
                                 @if($value->status=='Pending' | $value->status=='Approved' | $value->status=='Rejected')
-                                <a href="javascript:void(0)" wire:click="setDelete({{$value->id}})"
-                                    data-toggle="modal" data-target="#deleteLoan{{$value->id}}">
-                                    <small class="text-xs text-danger"><b>Delete</b></small>
+                                <a href="javascript:void(0)" wire:click="setDeleteId({{$value->id}})"
+                                    data-bs-toggle="modal" data-bs-target="#deleteLoan{{$value->id}}">
+                                    <small class="text-xs text-danger"><i class="fa fa-trash" title="Delete Loan"></i></small>
                                 </a>
                                 |
                                 @endif
@@ -291,7 +291,7 @@
                                     @if($value->status=='Pending')
                                     <a href="javascript:void(0)" wire:click="editLoan({{$value->id}})"
                                         data-bs-toggle="modal" data-bs-target="#approveLoan{{$value->id}}">
-                                        <small class="text-xs text-info"><b>Approve</b></small>
+                                        <small class="text-xs text-info"><i class="fa fa-check" title="Aprove Loan"></i></small>
                                     </a>
                                     |
                                     @endif
@@ -300,11 +300,11 @@
                                 
                                 <a href="{{route('loan-details',['domain'=>auth()->user()->domain->name,'id'=>$value->id])}}"
                                    >
-                                    <small class="text-xs text-info"><b>View</b></small>
+                                    <small class="text-xs text-info"><i class="fa fa-eye" title="View Loan Details"></i></small>
                                 </a>
                             </td>
                             @include('livewire.content.admin.clients.includes.edit-loan')
-                            {{-- @include('livewire.admin.loans.options.delete') --}}
+                            @include('livewire.content.admin.clients.includes.delete-loan')
                             {{-- @include('livewire.admin.loans.options.disburse-update') --}}
                             @include('livewire.content.admin.clients.includes.approve-loan')
                             {{-- @include('livewire.admin.loans.options.reschedule-loan') --}}
@@ -312,8 +312,8 @@
 
                         </tr>
                         @empty
-                        <tr>
-                            <td>No Loans Found</td>
+                        <tr class="text-center">
+                            <td colspan="6"><small style="font-size: 12px">No Loans Found</small></td>
                         </tr>
                         @endforelse
                             </tbody>

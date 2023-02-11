@@ -24,6 +24,12 @@
 </script>
 
 <script>
+    window.livewire.on('loanDeleted',id => {
+        $('#deleteLoan'+id).modal('hide');     
+    });
+</script>
+
+<script>
     window.livewire.on('newPayment',() => {
         $('#newPayment').modal('hide');
     });

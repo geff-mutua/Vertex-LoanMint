@@ -158,8 +158,8 @@
 
                         </tr>
                         @empty
-                        <tr>
-                            <td>No Loans Found</td>
+                        <tr class="text-center">
+                            <td colspan="10">No Loans Found</td>
                         </tr>
                         @endforelse
 

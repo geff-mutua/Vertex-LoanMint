@@ -3,7 +3,10 @@
 namespace App\Http\Livewire\Content\Admin\Collections\Transactions;
 
 use Livewire\Component;
+use App\Models\SubAccount;
 use App\Models\Transaction;
+use Illuminate\Support\Carbon;
+use App\Models\SuspenseAccount;
 use App\Models\BorrowerLoanStatement;
 
 class TransactionDetail extends Component
@@ -12,8 +15,8 @@ class TransactionDetail extends Component
     protected $listeners=['viewDetails'];
     public $transaction;
 
-    public function viewDetails(){
-        dd('Reached Here');
+    public function viewDetails($id){
+      
         $this->transaction=Transaction::find($id);
     }
     public function render()

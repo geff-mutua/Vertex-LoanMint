@@ -49,10 +49,10 @@ class BorrowerProfile extends Component
     
         # Selected Loan for operations
         public $loan;
-    
-        protected $listeners=['topUp'];
+
         public function mount($id)
         {
+            
             $this->borrowerId = $id;
             $this->domain = auth()->user()->domain_id;
             $this->loanProducts = LoanProduct::all();
@@ -66,14 +66,12 @@ class BorrowerProfile extends Component
        
         public function deleteLoan()
         {
-    
+            
             Loan::find($this->deleteId)->delete();
-            $this->canDelete = false;
             $this->deleteId = null;
-            $this->transactionCode = null;
-            redirect()->route('borrower-profile', ['id' => $this->borrower->id]);
+            return redirect()->away(url('admin/clients/borrower-profile/'.$this->borrower->id));
         }
-    
+     
         public function approve()
         {
             $this->borrower->status = "1";
@@ -139,6 +137,12 @@ class BorrowerProfile extends Component
             $this->individual_loan_amount = $this->loan->amount;
             $this->loan_purpose = $this->loan->loan_purpose;
             $this->setLoanDetails();
+    
+        }
+        public function setDeleteId($id)
+        {
+    
+           $this->deleteId=$id;
     
         }
     
@@ -244,10 +248,7 @@ class BorrowerProfile extends Component
             $results = Loan::whereId($this->editId)->update([
                 'status' => 'Rejected',
             ]);
-            $this->dispatchBrowserEvent('swal', ['title' => 'Success',
-                'text' => 'Loan has been updated successfully',
-                'icon' => 'success',
-            ]);
+            $this->emit('approveLoan',$this->editId);
         }
         public function reschedule($id)
         {
@@ -288,6 +289,7 @@ class BorrowerProfile extends Component
     public function render()
     {
         $this->borrower = Borrower::find($this->borrowerId);
+        // dd(count($this->borrower->loan) );
         $this->reconcilliations = Transaction::where('borrower_id', $this->borrower->id)->get();
         $this->setLoanDetails();
         #Set Delete Realtime Validation

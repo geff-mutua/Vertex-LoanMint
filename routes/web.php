@@ -23,11 +23,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Shared
-// locale
-// Route::get('lang/{locale}', $controller_path . '\language\LanguageController@swap');
-
-
 // Admin Routes
 Route::domain('{domain}.localhost')->group(function(){
     Route::middleware(['auth','company'])->group(function(){
