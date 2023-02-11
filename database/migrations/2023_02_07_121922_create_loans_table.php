@@ -29,6 +29,7 @@ return new class extends Migration
             $table->timestamp('date'); // Issue Date
             $table->timestamp('due_date')->nullable();
             $table->integer('approved_by')->nullable(); //Approved By
+            $table->longText('reject_reason');
             $table->timestamps();
         });
     }

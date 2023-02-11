@@ -245,7 +245,7 @@
                                 {{-- RELEASE DATE --}}
                                 <td class="align-middle text-center">
                                     <span style="font-size:12px"
-                                        class="text-secondary text-xs">{{ Carbon\Carbon::parse($loan->due_date)->format('d/m/Y') }}</span>
+                                        class="text-secondary text-xs">{{ Carbon\Carbon::parse($loan->date)->format('d/m/Y') }}</span>
                                 </td>
                                 {{-- MATURITY DATE --}}
                                 <td class="align-middle text-center">
@@ -274,7 +274,7 @@
             </div>
         </div>
 
-        <div class="card text-center mt-3">
+        <div class="card mt-3">
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs" role="tablist">
                     <li class="nav-item">
@@ -293,8 +293,48 @@
                 <div class="tab-content p-0 pt-4">
                     <div class="tab-pane fade show active" id="navs-within-card-active" role="tabpanel">
                         <h4 class="card-title">Loan Repayments</h4>
-                        <p class="card-text">No Repayment record found for the selected Loan.</p>
-                        <a href="javascript:void(0)" class="btn btn-primary">Add Repayment</a>
+                        <table class="table align-items-center mb-0" id="myTable">
+                            <thead>
+    
+                                <tr>
+                                    <th style="font-size: 12px">
+                                        Reference</th>
+                                    <th style="font-size: 12px">
+                                        Details</th>
+                                    <th style="font-size: 12px">
+                                        Method</th>
+    
+                                    <th style="font-size: 12px">
+                                        Mobile</th>
+                                    <th style="font-size: 12px">
+                                        Date</th>
+                                    <th style="font-size: 12px">
+                                        Amount</th>
+                                    <th style="font-size: 12px">
+                                        Status</th>
+                                    
+                                   
+                                </tr>
+                            </thead>
+                            <tbody>
+                               @forelse ($repayments as $item)
+                               <tr>
+                                     <td style="font-size:12px">{{$item->reference_code}}</td>
+                                     <td style="font-size:12px">{{$item->transaction_type}}</td>
+                                     <td style="font-size:12px">{{$item->payment_option}}</td>
+                                     <td style="font-size:12px">{{$item->msisdn}}</td>
+                                     <td style="font-size:12px">{{Carbon\Carbon::parse($item->date)->format('d/m/Y')}}</td>
+                                     <td style="font-size:12px">{{number_format($item->amount,2)}}</td>
+                                     <td style="font-size:12px">{{$item->status==0? 'Pending':'Approved'}}</td>
+                               </tr>
+                               @empty
+                                   
+                               @endforelse
+                            </tbody>
+                            
+                        </table>
+                        <a href="javascript:void(0)" data-bs-target="#newPayment" data-bs-toggle="modal"  class="btn btn-primary mt-2">Add Repayment</a>
+                        @include('livewire.content.admin.loans.includes.new-payment')
                     </div>
                     <div class="tab-pane fade" id="navs-within-card-link" role="tabpanel">
                         <div class="table-responsive p-0">
@@ -339,3 +379,4 @@
 
     </div>
 </div>
+

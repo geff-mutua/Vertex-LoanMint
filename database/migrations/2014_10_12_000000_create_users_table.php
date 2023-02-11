@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('role');
             $table->string('company_id');
+            $table->string('branch_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

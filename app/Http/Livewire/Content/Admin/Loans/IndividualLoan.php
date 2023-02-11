@@ -32,6 +32,8 @@ class IndividualLoan extends Component
     public $interest_type='--';
     public $processing_fee;
     public $repayment_period='--';
+    public $max_loan=0;
+    public $max_limit;
 
     #loan Calculation variables
     public $interest=0;
@@ -46,6 +48,14 @@ class IndividualLoan extends Component
     public $total_rejected=0.00;
     public $total_paid=0.00;
     public $total_arrears=0.00;
+
+    #Sumamry
+    public $summations=[
+        'active'=>0,
+        'pending'=>0,
+        'rejected'=>0,
+        'approved'=>0,
+    ];
 
     public function mount(){
         $this->loanProducts=LoanProduct::all();
@@ -74,9 +84,9 @@ class IndividualLoan extends Component
     }
     protected $rules = [
         'individual_loan_borrower' => 'required',
-        'individual_loan_amount'=>'required',
+        'individual_loan_amount'=>'required|numeric',
         'loan_purpose'=>'required',
-        'loan_product'=>'required'
+        'loan_product'=>'required',
        
     ];
 
@@ -94,6 +104,9 @@ class IndividualLoan extends Component
           $this->has_existing_loan='The selected Borrower has an active loan.';
             
         }else{
+           if((int)$this->individual_loan_amount >(int)$this->max_loan){
+            $this->max_limit='The borrowed amount should be Ksh '.number_format($this->max_loan).' or less';
+           }else{
             $results=Loan::Create([
                 'borrower_id'=>$this->individual_loan_borrower,
               
@@ -110,25 +123,28 @@ class IndividualLoan extends Component
                 'due_date'=>Carbon::now()->addDays($this->repayment_period),
             ]);
     
-                $this->interest_rate='--';
-                $this->interest_type='--';
-                $this->processing_fee=null;
-                $this->repayment_period='--';
-                $this->total=0;
-                $this->interest=0;
-                $this->individual_loan_borrower=null;
-                $this->loan_product=null;
-                $this->individual_loan_amount=null;
-                $this->interest=null;
-                $this->total=null;
-                $this->processing_fee=null;
-                $this->loan_purpose=null;
+            $this->interest_rate='--';
+            $this->interest_type='--';
+            $this->processing_fee=null;
+            $this->repayment_period='--';
+            $this->total=0;
+            $this->interest=0;
+            $this->individual_loan_borrower=null;
+            $this->loan_product=null;
+            $this->individual_loan_amount=null;
+            $this->interest=null;
+            $this->total=null;
+            $this->processing_fee=null;
+            $this->loan_purpose=null;
 
+            $this->emit('LoanCreated');
+
+           }
         }            
     }
 
     public function hasActiveLoan($id){
-        $exists=Loan::where('borrower_id',$id)->whereStatus('Active')->first();
+        $exists=Loan::where('borrower_id',$id)->whereStatus('Active')->orWhere('status',"Pending")->first();
         
         if($exists==null){
             return false;
@@ -144,6 +160,7 @@ class IndividualLoan extends Component
             $this->interest_type=$product->interest_type;
             $this->processing_fee=$product->procesing_fee_rate;
             $this->repayment_period=$product->duration;
+            $this->max_loan=$product->max_loan;
 
             if( $this->individual_loan_amount !=null){
                 

@@ -48,4 +48,8 @@ class User extends Authenticatable
     public function domain(){
         return $this->belongsTo(Domain::class);
     }
+    public function branch(){
+        return $this->belongsTo(Branch::class,'branch_id');
+       }
+
 }

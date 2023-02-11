@@ -31,6 +31,8 @@ class BorrowerProfile extends Component
         public $loanProducts = [];
         public $domain;
         public $loan_product;
+        public $max_loan=0;
+        public $max_limit;
     
         #Deleting Loan Values
         public $canDelete = false;
@@ -76,6 +78,7 @@ class BorrowerProfile extends Component
         {
             $this->borrower->status = "1";
             $this->borrower->save();
+            
         }
     
         public function reject()
@@ -92,6 +95,7 @@ class BorrowerProfile extends Component
                 $this->interest_type = $product->interest_type;
                 $this->processing_fee = $product->procesing_fee_rate;
                 $this->repayment_period = $product->duration;
+                $this->max_loan=$product->max_loan;
     
                 if ($this->individual_loan_amount != null) {
     
@@ -147,18 +151,28 @@ class BorrowerProfile extends Component
     
         public function updateLoan()
         {
-            
-            $results = Loan::whereId($this->editId)->update([
-    
-                'loan_product_id' => $this->loan_product,
-                'amount' => $this->individual_loan_amount,
-                'interest' => $this->interest,
-                'total' => $this->total,
-                'processing_fee' => $this->processing_fee ? '1' : '2',
-                'loan_purpose' => $this->loan_purpose,
-                'date' => Carbon::now(),
-                'due_date' => Carbon::now()->addDays($this->repayment_period),
+            $this->max_limit=null;
+            $this->validate([
+                'individual_loan_amount'=>'required|numeric',
+                'loan_product'=>'required'
             ]);
+            if((int)$this->individual_loan_amount >(int)$this->max_loan){
+                $this->max_limit='The borrowed amount should be Ksh '.number_format($this->max_loan).' or less';
+               }else{
+                $results = Loan::whereId($this->editId)->update([
+    
+                    'loan_product_id' => $this->loan_product,
+                    'amount' => $this->individual_loan_amount,
+                    'interest' => $this->interest,
+                    'total' => $this->total,
+                    'processing_fee' => $this->processing_fee ? '1' : '2',
+                    'loan_purpose' => $this->loan_purpose,
+                    'date' => Carbon::now(),
+                    'due_date' => Carbon::now()->addDays($this->repayment_period),
+                ]);
+                $this->emit('LoanEdited',$this->editId);
+               }
+           
 
         }
     
@@ -222,10 +236,7 @@ class BorrowerProfile extends Component
                 ]);
               }
     
-            $this->dispatchBrowserEvent('swal', ['title' => 'Updated',
-                'text' => 'Loan has been updated successfully',
-                'icon' => 'success',
-            ]);
+              $this->emit('approveLoan',$this->editId);
         }
         public function rejectLoan()
         {

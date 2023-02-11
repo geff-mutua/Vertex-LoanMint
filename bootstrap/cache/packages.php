@@ -1,4 +1,26 @@
 <?php return array (
+  'barryvdh/laravel-dompdf' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Barryvdh\\DomPDF\\ServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'PDF' => 'Barryvdh\\DomPDF\\Facade\\Pdf',
+    ),
+  ),
+  'elibyy/tcpdf-laravel' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Elibyy\\TCPDF\\ServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'PDF' => 'Elibyy\\TCPDF\\Facades\\TCPDF',
+    ),
+  ),
   'fruitcake/laravel-cors' => 
   array (
     'providers' => 

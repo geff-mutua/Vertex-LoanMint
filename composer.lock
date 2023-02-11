@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3a1f971d1031cf70d04f6a911546eb84",
+    "content-hash": "d91555ef931ee117da572e9331af593b",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -61,6 +61,82 @@
                 "source": "https://github.com/asm89/stack-cors/tree/v2.1.1"
             },
             "time": "2022-01-18T09:12:03+00:00"
+        },
+        {
+            "name": "barryvdh/laravel-dompdf",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/barryvdh/laravel-dompdf.git",
+                "reference": "de83130d029289e1b59f28b41c314ce1d157b4a0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/barryvdh/laravel-dompdf/zipball/de83130d029289e1b59f28b41c314ce1d157b4a0",
+                "reference": "de83130d029289e1b59f28b41c314ce1d157b4a0",
+                "shasum": ""
+            },
+            "require": {
+                "dompdf/dompdf": "^1.2.1",
+                "illuminate/support": "^6|^7|^8|^9",
+                "php": "^7.2 || ^8.0"
+            },
+            "require-dev": {
+                "nunomaduro/larastan": "^1|^2",
+                "orchestra/testbench": "^4|^5|^6|^7",
+                "phpro/grumphp": "^1",
+                "squizlabs/php_codesniffer": "^3.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Barryvdh\\DomPDF\\ServiceProvider"
+                    ],
+                    "aliases": {
+                        "PDF": "Barryvdh\\DomPDF\\Facade\\Pdf"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Barryvdh\\DomPDF\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Barry vd. Heuvel",
+                    "email": "barryvdh@gmail.com"
+                }
+            ],
+            "description": "A DOMPDF Wrapper for Laravel",
+            "keywords": [
+                "dompdf",
+                "laravel",
+                "pdf"
+            ],
+            "support": {
+                "issues": "https://github.com/barryvdh/laravel-dompdf/issues",
+                "source": "https://github.com/barryvdh/laravel-dompdf/tree/v1.0.2"
+            },
+            "funding": [
+                {
+                    "url": "https://fruitcake.nl",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/barryvdh",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-05-19T15:08:38+00:00"
         },
         {
             "name": "brick/math",
@@ -361,6 +437,75 @@
             "time": "2022-12-15T16:57:16+00:00"
         },
         {
+            "name": "dompdf/dompdf",
+            "version": "v1.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dompdf/dompdf.git",
+                "reference": "5031045d9640b38cfc14aac9667470df09c9e090"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dompdf/dompdf/zipball/5031045d9640b38cfc14aac9667470df09c9e090",
+                "reference": "5031045d9640b38cfc14aac9667470df09c9e090",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-mbstring": "*",
+                "phenx/php-font-lib": "^0.5.4",
+                "phenx/php-svg-lib": "^0.3.3 || ^0.4.0",
+                "php": "^7.1 || ^8.0"
+            },
+            "require-dev": {
+                "ext-json": "*",
+                "ext-zip": "*",
+                "mockery/mockery": "^1.3",
+                "phpunit/phpunit": "^7.5 || ^8 || ^9",
+                "squizlabs/php_codesniffer": "^3.5"
+            },
+            "suggest": {
+                "ext-gd": "Needed to process images",
+                "ext-gmagick": "Improves image processing performance",
+                "ext-imagick": "Improves image processing performance",
+                "ext-zlib": "Needed for pdf stream compression"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Dompdf\\": "src/"
+                },
+                "classmap": [
+                    "lib/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Ménager",
+                    "email": "fabien.menager@gmail.com"
+                },
+                {
+                    "name": "Brian Sweeney",
+                    "email": "eclecticgeek@gmail.com"
+                },
+                {
+                    "name": "Gabriel Bull",
+                    "email": "me@gabrielbull.com"
+                }
+            ],
+            "description": "DOMPDF is a CSS 2.1 compliant HTML to PDF converter",
+            "homepage": "https://github.com/dompdf/dompdf",
+            "support": {
+                "issues": "https://github.com/dompdf/dompdf/issues",
+                "source": "https://github.com/dompdf/dompdf/tree/v1.2.2"
+            },
+            "time": "2022-04-27T13:50:54+00:00"
+        },
+        {
             "name": "dragonmantank/cron-expression",
             "version": "v3.3.2",
             "source": {
@@ -487,6 +632,62 @@
                 }
             ],
             "time": "2023-01-14T14:17:03+00:00"
+        },
+        {
+            "name": "elibyy/tcpdf-laravel",
+            "version": "10.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/elibyy/tcpdf-laravel.git",
+                "reference": "6ce7af84163ec9ba0d32bd034e88061df647fb77"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/elibyy/tcpdf-laravel/zipball/6ce7af84163ec9ba0d32bd034e88061df647fb77",
+                "reference": "6ce7af84163ec9ba0d32bd034e88061df647fb77",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^6.0|^7.0|^8.0|^9.0|^10.0",
+                "tecnickcom/tcpdf": "6.2.*|6.3.*|6.4.*|6.5.*|6.6.*|dev-main"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Elibyy\\TCPDF\\ServiceProvider"
+                    ],
+                    "aliases": {
+                        "PDF": "Elibyy\\TCPDF\\Facades\\TCPDF"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Elibyy\\TCPDF\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "eli y",
+                    "email": "elibyy@gmail.com"
+                }
+            ],
+            "description": "tcpdf support for Laravel 6, 7, 8, 9",
+            "keywords": [
+                "TCPDF",
+                "laravel",
+                "pdf"
+            ],
+            "support": {
+                "issues": "https://github.com/elibyy/tcpdf-laravel/issues",
+                "source": "https://github.com/elibyy/tcpdf-laravel/tree/10.0.0"
+            },
+            "time": "2023-02-08T21:12:41+00:00"
         },
         {
             "name": "fruitcake/laravel-cors",
@@ -1032,17 +1233,101 @@
             "time": "2022-10-26T14:07:24+00:00"
         },
         {
-            "name": "laravel/breeze",
-            "version": "v1.18.1",
+            "name": "guzzlehttp/uri-template",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/laravel/breeze.git",
-                "reference": "bed2fb2a8a4131be37cc3556826cca961db3406a"
+                "url": "https://github.com/guzzle/uri-template.git",
+                "reference": "b945d74a55a25a949158444f09ec0d3c120d69e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/breeze/zipball/bed2fb2a8a4131be37cc3556826cca961db3406a",
-                "reference": "bed2fb2a8a4131be37cc3556826cca961db3406a",
+                "url": "https://api.github.com/repos/guzzle/uri-template/zipball/b945d74a55a25a949158444f09ec0d3c120d69e2",
+                "reference": "b945d74a55a25a949158444f09ec0d3c120d69e2",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2.5 || ^8.0",
+                "symfony/polyfill-php80": "^1.17"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.5.19 || ^9.5.8",
+                "uri-template/tests": "1.0.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\UriTemplate\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Graham Campbell",
+                    "email": "hello@gjcampbell.co.uk",
+                    "homepage": "https://github.com/GrahamCampbell"
+                },
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                },
+                {
+                    "name": "George Mponos",
+                    "email": "gmponos@gmail.com",
+                    "homepage": "https://github.com/gmponos"
+                },
+                {
+                    "name": "Tobias Nyholm",
+                    "email": "tobias.nyholm@gmail.com",
+                    "homepage": "https://github.com/Nyholm"
+                }
+            ],
+            "description": "A polyfill class for uri_template of PHP",
+            "keywords": [
+                "guzzlehttp",
+                "uri-template"
+            ],
+            "support": {
+                "issues": "https://github.com/guzzle/uri-template/issues",
+                "source": "https://github.com/guzzle/uri-template/tree/v1.0.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/GrahamCampbell",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/Nyholm",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/guzzlehttp/uri-template",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-10-07T12:57:01+00:00"
+        },
+        {
+            "name": "laravel/breeze",
+            "version": "v1.18.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/breeze.git",
+                "reference": "e6cd4e69d20885739c87eb538286d3bfbeaad7e2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/breeze/zipball/e6cd4e69d20885739c87eb538286d3bfbeaad7e2",
+                "reference": "e6cd4e69d20885739c87eb538286d3bfbeaad7e2",
                 "shasum": ""
             },
             "require": {
@@ -1090,20 +1375,20 @@
                 "issues": "https://github.com/laravel/breeze/issues",
                 "source": "https://github.com/laravel/breeze"
             },
-            "time": "2023-01-31T16:16:21+00:00"
+            "time": "2023-02-02T14:39:03+00:00"
         },
         {
             "name": "laravel/framework",
-            "version": "v9.50.2",
+            "version": "v9.51.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "39932773c09658ddea9045958f305e67f9304995"
+                "reference": "b81123134349a013a738a9f7f715c6ce99d5a414"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/39932773c09658ddea9045958f305e67f9304995",
-                "reference": "39932773c09658ddea9045958f305e67f9304995",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/b81123134349a013a738a9f7f715c6ce99d5a414",
+                "reference": "b81123134349a013a738a9f7f715c6ce99d5a414",
                 "shasum": ""
             },
             "require": {
@@ -1111,9 +1396,15 @@
                 "doctrine/inflector": "^2.0.5",
                 "dragonmantank/cron-expression": "^3.3.2",
                 "egulias/email-validator": "^3.2.1|^4.0",
+                "ext-ctype": "*",
+                "ext-filter": "*",
+                "ext-hash": "*",
                 "ext-mbstring": "*",
                 "ext-openssl": "*",
+                "ext-session": "*",
+                "ext-tokenizer": "*",
                 "fruitcake/php-cors": "^1.2",
+                "guzzlehttp/uri-template": "^1.0",
                 "laravel/serializable-closure": "^1.2.2",
                 "league/commonmark": "^2.2.1",
                 "league/flysystem": "^3.8.0",
@@ -1185,6 +1476,7 @@
                 "ably/ably-php": "^1.0",
                 "aws/aws-sdk-php": "^3.235.5",
                 "doctrine/dbal": "^2.13.3|^3.1.4",
+                "ext-gmp": "*",
                 "fakerphp/faker": "^1.21",
                 "guzzlehttp/guzzle": "^7.5",
                 "league/flysystem-aws-s3-v3": "^3.0",
@@ -1207,10 +1499,13 @@
                 "aws/aws-sdk-php": "Required to use the SQS queue driver, DynamoDb failed job storage, and SES mail driver (^3.235.5).",
                 "brianium/paratest": "Required to run tests in parallel (^6.0).",
                 "doctrine/dbal": "Required to rename columns and drop SQLite columns (^2.13.3|^3.1.4).",
+                "ext-apcu": "Required to use the APC cache driver.",
+                "ext-fileinfo": "Required to use the Filesystem class.",
                 "ext-ftp": "Required to use the Flysystem FTP driver.",
                 "ext-gd": "Required to use Illuminate\\Http\\Testing\\FileFactory::image().",
                 "ext-memcached": "Required to use the memcache cache driver.",
-                "ext-pcntl": "Required to use all features of the queue worker.",
+                "ext-pcntl": "Required to use all features of the queue worker and console signal trapping.",
+                "ext-pdo": "Required to use all database features.",
                 "ext-posix": "Required to use all features of the queue worker.",
                 "ext-redis": "Required to use the Redis cache and queue drivers (^4.0|^5.0).",
                 "fakerphp/faker": "Required to use the eloquent factory builder (^1.9.1).",
@@ -1278,7 +1573,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2023-02-02T20:52:46+00:00"
+            "time": "2023-02-07T15:37:18+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -1883,16 +2178,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "2.8.0",
+            "version": "2.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "720488632c590286b88b80e62aa3d3d551ad4a50"
+                "reference": "f259e2b15fb95494c83f52d3caad003bbf5ffaa1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/720488632c590286b88b80e62aa3d3d551ad4a50",
-                "reference": "720488632c590286b88b80e62aa3d3d551ad4a50",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/f259e2b15fb95494c83f52d3caad003bbf5ffaa1",
+                "reference": "f259e2b15fb95494c83f52d3caad003bbf5ffaa1",
                 "shasum": ""
             },
             "require": {
@@ -1907,7 +2202,7 @@
                 "doctrine/couchdb": "~1.0@dev",
                 "elasticsearch/elasticsearch": "^7 || ^8",
                 "ext-json": "*",
-                "graylog2/gelf-php": "^1.4.2",
+                "graylog2/gelf-php": "^1.4.2 || ^2@dev",
                 "guzzlehttp/guzzle": "^7.4",
                 "guzzlehttp/psr7": "^2.2",
                 "mongodb/mongodb": "^1.8",
@@ -1969,7 +2264,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Seldaek/monolog/issues",
-                "source": "https://github.com/Seldaek/monolog/tree/2.8.0"
+                "source": "https://github.com/Seldaek/monolog/tree/2.9.1"
             },
             "funding": [
                 {
@@ -1981,7 +2276,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-07-24T11:55:47+00:00"
+            "time": "2023-02-06T13:44:46+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -2292,16 +2587,16 @@
         },
         {
             "name": "nunomaduro/termwind",
-            "version": "v1.15.0",
+            "version": "v1.15.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/termwind.git",
-                "reference": "594ab862396c16ead000de0c3c38f4a5cbe1938d"
+                "reference": "8ab0b32c8caa4a2e09700ea32925441385e4a5dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/termwind/zipball/594ab862396c16ead000de0c3c38f4a5cbe1938d",
-                "reference": "594ab862396c16ead000de0c3c38f4a5cbe1938d",
+                "url": "https://api.github.com/repos/nunomaduro/termwind/zipball/8ab0b32c8caa4a2e09700ea32925441385e4a5dc",
+                "reference": "8ab0b32c8caa4a2e09700ea32925441385e4a5dc",
                 "shasum": ""
             },
             "require": {
@@ -2358,7 +2653,7 @@
             ],
             "support": {
                 "issues": "https://github.com/nunomaduro/termwind/issues",
-                "source": "https://github.com/nunomaduro/termwind/tree/v1.15.0"
+                "source": "https://github.com/nunomaduro/termwind/tree/v1.15.1"
             },
             "funding": [
                 {
@@ -2374,7 +2669,97 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-12-20T19:00:15+00:00"
+            "time": "2023-02-08T01:06:31+00:00"
+        },
+        {
+            "name": "phenx/php-font-lib",
+            "version": "0.5.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dompdf/php-font-lib.git",
+                "reference": "dd448ad1ce34c63d09baccd05415e361300c35b4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dompdf/php-font-lib/zipball/dd448ad1ce34c63d09baccd05415e361300c35b4",
+                "reference": "dd448ad1ce34c63d09baccd05415e361300c35b4",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "^3 || ^4 || ^5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "FontLib\\": "src/FontLib"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Ménager",
+                    "email": "fabien.menager@gmail.com"
+                }
+            ],
+            "description": "A library to read, parse, export and make subsets of different types of font files.",
+            "homepage": "https://github.com/PhenX/php-font-lib",
+            "support": {
+                "issues": "https://github.com/dompdf/php-font-lib/issues",
+                "source": "https://github.com/dompdf/php-font-lib/tree/0.5.4"
+            },
+            "time": "2021-12-17T19:44:54+00:00"
+        },
+        {
+            "name": "phenx/php-svg-lib",
+            "version": "0.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dompdf/php-svg-lib.git",
+                "reference": "4498b5df7b08e8469f0f8279651ea5de9626ed02"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dompdf/php-svg-lib/zipball/4498b5df7b08e8469f0f8279651ea5de9626ed02",
+                "reference": "4498b5df7b08e8469f0f8279651ea5de9626ed02",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": "^7.1 || ^7.2 || ^7.3 || ^7.4 || ^8.0",
+                "sabberworm/php-css-parser": "^8.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Svg\\": "src/Svg"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Ménager",
+                    "email": "fabien.menager@gmail.com"
+                }
+            ],
+            "description": "A library to read, parse and export to PDF SVG files.",
+            "homepage": "https://github.com/PhenX/php-svg-lib",
+            "support": {
+                "issues": "https://github.com/dompdf/php-svg-lib/issues",
+                "source": "https://github.com/dompdf/php-svg-lib/tree/0.4.1"
+            },
+            "time": "2022-03-07T12:52:04+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -3030,12 +3415,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "25c4faac19549ebfcd3a6a73732dddeb188eaf5a"
+                "reference": "bf2bee216a4379eaf62162307d62bb7850405fec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/25c4faac19549ebfcd3a6a73732dddeb188eaf5a",
-                "reference": "25c4faac19549ebfcd3a6a73732dddeb188eaf5a",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/bf2bee216a4379eaf62162307d62bb7850405fec",
+                "reference": "bf2bee216a4379eaf62162307d62bb7850405fec",
                 "shasum": ""
             },
             "require": {
@@ -3115,7 +3500,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-28T17:00:47+00:00"
+            "time": "2023-02-07T16:14:23+00:00"
         },
         {
             "name": "realrashid/sweet-alert",
@@ -3206,6 +3591,59 @@
                 }
             ],
             "time": "2022-05-28T13:28:03+00:00"
+        },
+        {
+            "name": "sabberworm/php-css-parser",
+            "version": "8.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sabberworm/PHP-CSS-Parser.git",
+                "reference": "e41d2140031d533348b2192a83f02d8dd8a71d30"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sabberworm/PHP-CSS-Parser/zipball/e41d2140031d533348b2192a83f02d8dd8a71d30",
+                "reference": "e41d2140031d533348b2192a83f02d8dd8a71d30",
+                "shasum": ""
+            },
+            "require": {
+                "ext-iconv": "*",
+                "php": ">=5.6.20"
+            },
+            "require-dev": {
+                "codacy/coverage": "^1.4",
+                "phpunit/phpunit": "^4.8.36"
+            },
+            "suggest": {
+                "ext-mbstring": "for parsing UTF-8 CSS"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sabberworm\\CSS\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Raphael Schweikert"
+                }
+            ],
+            "description": "Parser for CSS Files written in PHP",
+            "homepage": "https://www.sabberworm.com/blog/2010/6/10/php-css-parser",
+            "keywords": [
+                "css",
+                "parser",
+                "stylesheet"
+            ],
+            "support": {
+                "issues": "https://github.com/sabberworm/PHP-CSS-Parser/issues",
+                "source": "https://github.com/sabberworm/PHP-CSS-Parser/tree/8.4.0"
+            },
+            "time": "2021-12-11T13:40:54+00:00"
         },
         {
             "name": "symfony/console",
@@ -5403,6 +5841,78 @@
             "time": "2023-01-20T17:45:48+00:00"
         },
         {
+            "name": "tecnickcom/tcpdf",
+            "version": "6.6.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tecnickcom/TCPDF.git",
+                "reference": "e3cffc9bcbc76e89e167e9eb0bbda0cab7518459"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/e3cffc9bcbc76e89e167e9eb0bbda0cab7518459",
+                "reference": "e3cffc9bcbc76e89e167e9eb0bbda0cab7518459",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "config",
+                    "include",
+                    "tcpdf.php",
+                    "tcpdf_parser.php",
+                    "tcpdf_import.php",
+                    "tcpdf_barcodes_1d.php",
+                    "tcpdf_barcodes_2d.php",
+                    "include/tcpdf_colors.php",
+                    "include/tcpdf_filters.php",
+                    "include/tcpdf_font_data.php",
+                    "include/tcpdf_fonts.php",
+                    "include/tcpdf_images.php",
+                    "include/tcpdf_static.php",
+                    "include/barcodes/datamatrix.php",
+                    "include/barcodes/pdf417.php",
+                    "include/barcodes/qrcode.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Nicola Asuni",
+                    "email": "info@tecnick.com",
+                    "role": "lead"
+                }
+            ],
+            "description": "TCPDF is a PHP class for generating PDF documents and barcodes.",
+            "homepage": "http://www.tcpdf.org/",
+            "keywords": [
+                "PDFD32000-2008",
+                "TCPDF",
+                "barcodes",
+                "datamatrix",
+                "pdf",
+                "pdf417",
+                "qrcode"
+            ],
+            "support": {
+                "issues": "https://github.com/tecnickcom/TCPDF/issues",
+                "source": "https://github.com/tecnickcom/TCPDF/tree/6.6.2"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&currency_code=GBP&business=paypal@tecnick.com&item_name=donation%20for%20tcpdf%20project",
+                    "type": "custom"
+                }
+            ],
+            "time": "2022-12-17T10:28:59+00:00"
+        },
+        {
             "name": "tijsverkoyen/css-to-inline-styles",
             "version": "2.2.6",
             "source": {
@@ -5935,23 +6445,24 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.19.0",
+            "version": "v1.20.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "4f230634a3163f3442def6a4e6ffdb02b02e14d6"
+                "reference": "4b85dbfa3dceeaf7227e3029707562fd60297e86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/4f230634a3163f3442def6a4e6ffdb02b02e14d6",
-                "reference": "4f230634a3163f3442def6a4e6ffdb02b02e14d6",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/4b85dbfa3dceeaf7227e3029707562fd60297e86",
+                "reference": "4b85dbfa3dceeaf7227e3029707562fd60297e86",
                 "shasum": ""
             },
             "require": {
                 "illuminate/console": "^8.0|^9.0|^10.0",
                 "illuminate/contracts": "^8.0|^9.0|^10.0",
                 "illuminate/support": "^8.0|^9.0|^10.0",
-                "php": "^7.3|^8.0"
+                "php": "^7.3|^8.0",
+                "symfony/yaml": "^6.0"
             },
             "bin": [
                 "bin/sail"
@@ -5991,7 +6502,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2023-01-31T13:37:57+00:00"
+            "time": "2023-02-08T02:08:37+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -6643,16 +7154,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "9.5.28",
+            "version": "9.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "954ca3113a03bf780d22f07bf055d883ee04b65e"
+                "reference": "e7b1615e3e887d6c719121c6d4a44b0ab9645555"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/954ca3113a03bf780d22f07bf055d883ee04b65e",
-                "reference": "954ca3113a03bf780d22f07bf055d883ee04b65e",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/e7b1615e3e887d6c719121c6d4a44b0ab9645555",
+                "reference": "e7b1615e3e887d6c719121c6d4a44b0ab9645555",
                 "shasum": ""
             },
             "require": {
@@ -6694,7 +7205,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.5-dev"
+                    "dev-master": "9.6-dev"
                 }
             },
             "autoload": {
@@ -6725,7 +7236,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.28"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.6.3"
             },
             "funding": [
                 {
@@ -6741,7 +7252,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-14T12:32:24+00:00"
+            "time": "2023-02-04T13:37:15+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -7109,16 +7620,16 @@
         },
         {
             "name": "sebastian/environment",
-            "version": "5.1.4",
+            "version": "5.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/environment.git",
-                "reference": "1b5dff7bb151a4db11d49d90e5408e4e938270f7"
+                "reference": "830c43a844f1f8d5b7a1f6d6076b784454d8b7ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/1b5dff7bb151a4db11d49d90e5408e4e938270f7",
-                "reference": "1b5dff7bb151a4db11d49d90e5408e4e938270f7",
+                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/830c43a844f1f8d5b7a1f6d6076b784454d8b7ed",
+                "reference": "830c43a844f1f8d5b7a1f6d6076b784454d8b7ed",
                 "shasum": ""
             },
             "require": {
@@ -7160,7 +7671,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/environment/issues",
-                "source": "https://github.com/sebastianbergmann/environment/tree/5.1.4"
+                "source": "https://github.com/sebastianbergmann/environment/tree/5.1.5"
             },
             "funding": [
                 {
@@ -7168,7 +7679,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-04-03T09:37:03+00:00"
+            "time": "2023-02-03T06:03:51+00:00"
         },
         {
             "name": "sebastian/exporter",
@@ -7482,16 +7993,16 @@
         },
         {
             "name": "sebastian/recursion-context",
-            "version": "4.0.4",
+            "version": "4.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/recursion-context.git",
-                "reference": "cd9d8cf3c5804de4341c283ed787f099f5506172"
+                "reference": "e75bd0f07204fec2a0af9b0f3cfe97d05f92efc1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/recursion-context/zipball/cd9d8cf3c5804de4341c283ed787f099f5506172",
-                "reference": "cd9d8cf3c5804de4341c283ed787f099f5506172",
+                "url": "https://api.github.com/repos/sebastianbergmann/recursion-context/zipball/e75bd0f07204fec2a0af9b0f3cfe97d05f92efc1",
+                "reference": "e75bd0f07204fec2a0af9b0f3cfe97d05f92efc1",
                 "shasum": ""
             },
             "require": {
@@ -7530,10 +8041,10 @@
                 }
             ],
             "description": "Provides functionality to recursively process PHP variables",
-            "homepage": "http://www.github.com/sebastianbergmann/recursion-context",
+            "homepage": "https://github.com/sebastianbergmann/recursion-context",
             "support": {
                 "issues": "https://github.com/sebastianbergmann/recursion-context/issues",
-                "source": "https://github.com/sebastianbergmann/recursion-context/tree/4.0.4"
+                "source": "https://github.com/sebastianbergmann/recursion-context/tree/4.0.5"
             },
             "funding": [
                 {
@@ -7541,7 +8052,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-10-26T13:17:30+00:00"
+            "time": "2023-02-03T06:07:39+00:00"
         },
         {
             "name": "sebastian/resource-operations",
@@ -7600,16 +8111,16 @@
         },
         {
             "name": "sebastian/type",
-            "version": "3.2.0",
+            "version": "3.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/type.git",
-                "reference": "fb3fe09c5f0bae6bc27ef3ce933a1e0ed9464b6e"
+                "reference": "75e2c2a32f5e0b3aef905b9ed0b179b953b3d7c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/type/zipball/fb3fe09c5f0bae6bc27ef3ce933a1e0ed9464b6e",
-                "reference": "fb3fe09c5f0bae6bc27ef3ce933a1e0ed9464b6e",
+                "url": "https://api.github.com/repos/sebastianbergmann/type/zipball/75e2c2a32f5e0b3aef905b9ed0b179b953b3d7c7",
+                "reference": "75e2c2a32f5e0b3aef905b9ed0b179b953b3d7c7",
                 "shasum": ""
             },
             "require": {
@@ -7644,7 +8155,7 @@
             "homepage": "https://github.com/sebastianbergmann/type",
             "support": {
                 "issues": "https://github.com/sebastianbergmann/type/issues",
-                "source": "https://github.com/sebastianbergmann/type/tree/3.2.0"
+                "source": "https://github.com/sebastianbergmann/type/tree/3.2.1"
             },
             "funding": [
                 {
@@ -7652,7 +8163,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-09-12T14:47:03+00:00"
+            "time": "2023-02-03T06:13:03+00:00"
         },
         {
             "name": "sebastian/version",
@@ -8001,6 +8512,80 @@
                 }
             ],
             "time": "2023-01-03T19:28:04+00:00"
+        },
+        {
+            "name": "symfony/yaml",
+            "version": "v6.2.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/yaml.git",
+                "reference": "2bbfbdacc8a15574f8440c4838ce0d7bb6c86b19"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/2bbfbdacc8a15574f8440c4838ce0d7bb6c86b19",
+                "reference": "2bbfbdacc8a15574f8440c4838ce0d7bb6c86b19",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "symfony/polyfill-ctype": "^1.8"
+            },
+            "conflict": {
+                "symfony/console": "<5.4"
+            },
+            "require-dev": {
+                "symfony/console": "^5.4|^6.0"
+            },
+            "suggest": {
+                "symfony/console": "For validating YAML files using the lint command"
+            },
+            "bin": [
+                "Resources/bin/yaml-lint"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Yaml\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Loads and dumps YAML files",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/yaml/tree/v6.2.5"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2023-01-10T18:53:53+00:00"
         },
         {
             "name": "theseer/tokenizer",

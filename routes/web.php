@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Report\ReportController;
 use App\Http\Controllers\pages\admin\AdminDashboard;
 use App\Http\Livewire\Content\Admin\Clients\Borrowers;
 use App\Http\Livewire\Content\Admin\Loans\LoanDetails;
@@ -10,8 +11,10 @@ use App\Http\Livewire\Content\Admin\Loans\IndividualLoan;
 use App\Http\Livewire\Content\Admin\Branches\CompanyBranch;
 use App\Http\Livewire\Content\Admin\Clients\BorrowerProfile;
 use App\Http\Controllers\pages\admin\clients\ClientController;
+use App\Http\Livewire\Content\Admin\Collections\AllCollections;
 use App\Http\Controllers\pages\admin\settings\theme\ThemeSetting;
 use App\Http\Controllers\pages\admin\settings\company\CompanySetting;
+use App\Http\Livewire\Content\Admin\Collections\Transactions\TransactionDetail;
 
 
 $controller_path = 'App\Http\Controllers';
@@ -45,6 +48,15 @@ Route::domain('{domain}.localhost')->group(function(){
             // Loans
             Route::get('/loans', IndividualLoan::class)->name('loans-list');
             Route::get('loan-details/{id}',LoanDetails::class)->name('loan-details');
+
+            //Collections
+            Route::get('/collections',AllCollections::class)->name('collections-list');
+
+            // Transactions
+            Route::get('/transaction/details/{id}',TransactionDetail::class)->name('transaction-detail');
+
+            //Reporting
+            Route::get('borrower-statement/{id}',[ReportController::class,'borrowerStatement']);
             
         });
     });

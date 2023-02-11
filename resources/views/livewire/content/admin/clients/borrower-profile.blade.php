@@ -188,7 +188,7 @@
                     </div>
                     <div>
                         @if($borrower->status==1)
-                        <button class="btn btn-sm btn-info">New Loan</button>
+                        <a href="/admin/borrower-statement/{{$borrower->id}}" class="btn btn-sm btn-info">Loan Statements</a>
                         @endif
                     </div>
                 </div>
@@ -211,9 +211,11 @@
                                 @forelse($borrower->loan()->orderBy('id','DESC')->get() as $key => $value)
                         <tr>
                             <td>
+                                <a href="{{route('loan-details',['domain'=>auth()->user()->domain->name,'id'=>$value->id])}}">
                                 <small class="text-xs text-info mb-0" style="font-size: 12px">
                                     {{ $value->transaction_code }}
                                 </small>
+                            </a>
                             </td>
                             <td>
                                 <p class="text-xs mb-0" style="font-size: 12px">
@@ -235,11 +237,11 @@
 
                             <td class="align-middle text-center text-sm">
                                 @if ($value->status == 'Active')
-                                <span class="text-xs text-success" style="font-size: 12px">{{ $value->status }}</span>
+                                <span class="text-xs badge bg-label-success" style="font-size: 12px">{{ $value->status }}</span>
                                 @elseif($value->status == 'Rejected')
-                                <span style="font-size: 12px" class="text-xs text-danger">{{ $value->status }}</span>
+                                <span style="font-size: 12px" class="text-xs badge bg-label-danger">{{ $value->status }}</span>
                                 @else
-                                <span style="font-size: 12px" class="text-xs text-warning">{{ $value->status }}</span>
+                                <span style="font-size: 12px" class="text-xs badge bg-label-warning">{{ $value->status }}</span>
                                 @endif
 
                             </td>
@@ -277,7 +279,7 @@
                                 |
                                 @endif
                                 @endif
-                                @if($value->status=='Pending' | $value->status=='Rejected')
+                                @if($value->status=='Pending' | $value->status=='Approved' | $value->status=='Rejected')
                                 <a href="javascript:void(0)" wire:click="setDelete({{$value->id}})"
                                     data-toggle="modal" data-target="#deleteLoan{{$value->id}}">
                                     <small class="text-xs text-danger"><b>Delete</b></small>
@@ -328,7 +330,7 @@
                 <div class="card-header d-flex justify-content-between">
                     <div class="card-title m-0 me-2">
                         <h5 class="m-0 me-2">Repayments</h5>
-                        <small class="text-muted">Total 58 Transactions done in this Month</small>
+                        <small class="text-muted">Total {{count($reconcilliations)}} Transactions done in this Month</small>
                     </div>
                     {{-- <div class="dropdown">
           <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -343,20 +345,39 @@
                 </div>
                 <div class="card-body">
                     <ul class="p-0 m-0">
+                        @forelse ($reconcilliations as $value )
                         <li class="d-flex mb-3 pb-1 align-items-center">
                             <div class="badge bg-label-primary me-3 rounded p-2">
-                                <i class="ti ti-wallet ti-sm"></i>
+                                <i class="ti ti-coin ti-sm"></i>
                             </div>
                             <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                 <div class="me-2">
-                                    <h6 class="mb-0">Wallet</h6>
-                                    <small class="text-muted d-block">Starbucks</small>
+                                    <h6 class="mb-0">{{$value->transaction_type}}</h6>
+                                    @if ($value->status == '1')
+                                    <span class="text-xs badge bg-label-success" style="font-size: 12px">Approved</span>
+                                    @elseif($value->status == '0')
+                                    <span style="font-size: 12px" class="text-xs badge bg-label-warning">Pending</span>
+                                    @else
+                                    <span style="font-size: 12px" class="text-xs badge bg-label-danger">Rejected</span>
+                                    @endif
+                                   
                                 </div>
                                 <div class="user-progress d-flex align-items-center gap-1">
-                                    <h6 class="mb-0 text-danger">-$75</h6>
+                                    @if ($value->status == '1')
+                                    <h6 class="mb-0 text-success">Ksh {{number_format($value->amount)}}</h6>
+                                    @elseif($value->status == '0')
+                                    <h6 class="mb-0 text-warning">Ksh {{number_format($value->amount)}}</h6>
+                                    @else
+                                    <h6 class="mb-0 text-danger">Ksh {{number_format($value->amount)}}</h6>
+                                    @endif
+                                    
                                 </div>
                             </div>
                         </li>
+                        @empty
+                            
+                        @endforelse
+                       
 
                     </ul>
                 </div>

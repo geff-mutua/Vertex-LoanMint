@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-               <form wire:submit.prevent="applyLoan">
+               <form>
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label>Select Borrower</label>
@@ -21,6 +21,7 @@
 
                                 @endforelse
                             </select>
+                           
                         </div>
                         @error('individual_loan_borrower') <small style="font-size: 10px"
                             class="text-danger">{{ $message
@@ -40,6 +41,9 @@
                         @error('individual_loan_amount') <small style="font-size: 10px"
                             class="text-danger">{{ $message
                             }}</small> @enderror
+                              <small style="font-size: 10px"
+                              class="text-danger">{{ $max_limit
+                              }}</small>
                     </div>
 
                     <div class="col-md-6">
@@ -114,8 +118,14 @@
                         <h6 for="" class="text-success">Ksh {{number_format($disbursed)}}</h6>
                     </div>
                     <div class=" d-flex justify-content-end pt-3">
-                        
-                            <button class="btn btn-primary" type="submit">Apply Loan</button>
+                        <button wire:click="applyLoan" class="btn btn-primary col-md-4" type="button">
+                            <div wire:loading wire:target="applyLoan">
+                                <span class="spinner-border me-1" role="status" aria-hidden="true"></span>
+                            </div>
+                            Apply Loan
+                          </button>
+                       
+                           
                         
                     </div>
 

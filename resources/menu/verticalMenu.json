@@ -43,6 +43,19 @@
       ]
     },
     {
+      "name": "Collections",
+      "icon": "menu-icon tf-icons ti ti-coin",
+      "slug": "collections",
+      "submenu": [
+        {
+          "url": "/admin/collections",
+          "name": "All Collection",
+          "slug": "collections-list"
+        }
+       
+      ]
+    },
+    {
       "name": "Loan Products",
       "icon": "menu-icon tf-icons ti ti-file",
       "slug": "loan-products",

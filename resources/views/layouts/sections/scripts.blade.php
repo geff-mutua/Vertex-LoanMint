@@ -39,3 +39,4 @@
 @yield('page-script')
 <!-- END: Page JS-->
 @livewireScripts
+@include('js.scripts')

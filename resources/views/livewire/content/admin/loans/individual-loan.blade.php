@@ -27,21 +27,95 @@
     @endsection
 
 
+    
+    @include('livewire.content.admin.loans.new-loan')
+
+    <div class="row">
+        <div class="col-xl-12 mb-4">
+            <div class="card">
+                <h5 class="card-header">Loan Summary</h5>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md mb-md-0 mb-2 ">
+                            <div class="form-check custom-option custom-option-basic">
+                                <label class="form-check-label custom-option-content" for="customRadioTemp1">
+                                    <input name="customRadioTemp" class="form-check-input" type="radio" value=""
+                                        id="customRadioTemp1" checked />
+                                    <span class="custom-option-header">
+                                        <span class="h6 mb-0">Active Loans</span>
+                                    </span>
+                                    <span class="custom-option-body">
+
+                                        <small>Ksh {{ number_format($summations['active']) }}</small>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-check custom-option custom-option-basic">
+                                <label class="form-check-label custom-option-content" for="customRadioTemp2">
+                                    <input name="customRadioTemp" class="form-check-input" type="radio" value=""
+                                        id="customRadioTemp2" />
+                                    <span class="custom-option-header">
+                                        <span class="h6 mb-0">Pending Approvals</span>
+
+                                    </span>
+                                    <span class="custom-option-body">
+                                        <small>Ksh {{ number_format($summations['pending']) }}</small>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-check custom-option custom-option-basic">
+                                <label class="form-check-label custom-option-content" for="customRadioTemp2">
+                                    <input name="customRadioTemp" class="form-check-input" type="radio" value=""
+                                        id="customRadioTemp2" />
+                                    <span class="custom-option-header">
+                                        <span class="h6 mb-0">Rejected Loans</span>
+
+                                    </span>
+                                    <span class="custom-option-body">
+                                        <small>Ksh {{ number_format($summations['rejected']) }}</small>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-check custom-option custom-option-basic">
+                                <label class="form-check-label custom-option-content" for="customRadioTemp2">
+                                    <input name="customRadioTemp" class="form-check-input" type="radio" value=""
+                                        id="customRadioTemp2" />
+                                    <span class="custom-option-header">
+                                        <span class="h6 mb-0">Approved</span>
+
+                                    </span>
+                                    <span class="custom-option-body">
+                                        <small>Ksh {{ number_format($summations['approved']) }}</small>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fixed Header -->
     <div class="d-flex justify-content-between mb-2">
         <div>
             <h5 class="card-header">@yield('title') </h5>
         </div>
         <div class="">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newLoan">
+            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#newLoan">
                 New Loan
               </button>
         </div>
     </div>
-    @include('livewire.content.admin.loans.new-loan')
-
-    <!-- Fixed Header -->
     <div class="card">
-
+      
         <div class="card-datatable table-responsive">
             <table class="table" id="dataTable1">
                 <thead>
@@ -130,7 +204,7 @@
                             <span class="text-danger text-xs font-weight-bold" style="font-size: 12px">Rejected</span>
                             @else
                             <p class="text-xs text-warning mb-0" style="font-size: 12px">
-                                Pending Disbursement</p>
+                                Pending</p>
                             @endif
 
                             @else
@@ -166,9 +240,11 @@
                                 2) }}</span>
                         </td>
                         {{-- RELEASE DATE --}}
-                        <td class="align-middle text-center">
+                        <td class="align-middle text
+                        
+                        -center">
                             <span style="font-size: 12px"
-                                class="text-secondary text-xs">{{Carbon\Carbon::parse($value->due_date)->format('d/m/Y')
+                                class="text-secondary text-xs">{{Carbon\Carbon::parse($value->date)->format('d/m/Y')
                                 }}</span>
                         </td>
                         {{-- MATURITY DATE --}}
@@ -179,11 +255,11 @@
                         </td>
                         <td class="align-middle text-center text-sm" style="font-size: 12px">
                             @if ($value->status == 'Active')
-                            <span class="text-xs text-success">{{ $value->status }}</span>
+                            <span class="text-xs badge bg-label-success">{{ $value->status }}</span>
                             @elseif($value->status == 'Rejected')
-                            <span class="text-xs text-danger">{{ $value->status }}</span>
+                            <span class="text-xs badge bg-label-danger">{{ $value->status }}</span>
                             @else
-                            <span class="text-xs text-info">{{ $value->status }}</span>
+                            <span class="text-xs badge bg-label-warning">{{ $value->status }}</span>
                             @endif
 
                         </td>

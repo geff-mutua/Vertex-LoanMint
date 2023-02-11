@@ -1,6 +1,6 @@
 @extends('layouts/layoutMaster')
 
-@section('title', 'Analytics')
+@section('title', 'Dashboard')
 
 @section('vendor-style')
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/apex-charts/apex-charts.css')}}" />
@@ -45,7 +45,7 @@
               <div class="d-flex align-items-center">
                 <div class="badge rounded-pill bg-label-primary me-3 p-2"><i class="ti ti-chart-pie-2 ti-sm"></i></div>
                 <div class="card-info">
-                  <h5 class="mb-0">230k</h5>
+                  <h5 class="mb-0">{{number_format($data['total_disbursement'])}}</h5>
                   <small>Loans Issued</small>
                 </div>
               </div>
@@ -54,7 +54,7 @@
               <div class="d-flex align-items-center">
                 <div class="badge rounded-pill bg-label-info me-3 p-2"><i class="ti ti-currency-dollar ti-sm"></i></div>
                 <div class="card-info">
-                  <h5 class="mb-0">8.549k</h5>
+                  <h5 class="mb-0">{{number_format($data['total_repayment'])}}</h5>
                   <small>Repayments</small>
                 </div>
               </div>
@@ -63,7 +63,7 @@
               <div class="d-flex align-items-center">
                 <div class="badge rounded-pill bg-label-danger me-3 p-2"><i class="ti ti-shopping-cart ti-sm"></i></div>
                 <div class="card-info">
-                  <h5 class="mb-0">1.423k</h5>
+                  <h5 class="mb-0">{{number_format($data['loan_balance'])}}</h5>
                   <small>Balances</small>
                 </div>
               </div>
@@ -72,7 +72,7 @@
               <div class="d-flex align-items-center">
                 <div class="badge rounded-pill bg-label-success me-3 p-2"><i class="ti ti-currency-dollar ti-sm"></i></div>
                 <div class="card-info">
-                  <h5 class="mb-0">$9745</h5>
+                  <h5 class="mb-0">{{number_format($data['arrears'])}}</h5>
                   <small>Loan Arrears</small>
                 </div>
               </div>
@@ -87,7 +87,7 @@
       <div class="card">
         <div class="card-body text-center">
           <div class="badge rounded-pill p-2 bg-label-danger mb-2"><i class="ti ti-users ti-sm"></i></div>
-          <h5 class="card-title mb-2">97.8k</h5>
+          <h5 class="card-title mb-2">{{$data['clients']}}</h5>
           <small>Total Clients</small>
         </div>
       </div>
@@ -98,7 +98,7 @@
       <div class="card">
         <div class="card-body text-center">
           <div class="badge rounded-pill p-2 bg-label-success mb-2"><i class="ti ti-message-dots ti-sm"></i></div>
-          <h5 class="card-title mb-2">3.4k</h5>
+          <h5 class="card-title mb-2">{{$data['groups']}}</h5>
           <small>Group Loans</small>
         </div>
       </div>
@@ -127,7 +127,7 @@
         <div class="row">
           <div class="col-12 col-md-4 d-flex flex-column align-self-end">
             <div class="d-flex gap-2 align-items-center mb-2 pb-1 flex-wrap">
-              <h1 class="mb-0">$468</h1>
+              <h4 class="mb-0">Ksh {{$data['today_repayment']}}</h4>
               <div class="badge rounded bg-label-success">+4.2%</div>
             </div>
             <small class="text-muted">Statistics of the loan repayments</small>
@@ -143,7 +143,7 @@
                 <div class="badge rounded bg-label-primary p-1"><i class="ti ti-currency-dollar ti-sm"></i></div>
                 <h6 class="mb-0">Earned Income</h6>
               </div>
-              <h4 class="my-2 pt-1">$545.69</h4>
+              <h4 class="my-2 pt-1">{{number_format($data['total_profit'])}}</h4>
               <div class="progress w-75" style="height:4px">
                 <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
@@ -151,9 +151,9 @@
             <div class="col-12 col-sm-4">
               <div class="d-flex gap-2 align-items-center">
                 <div class="badge rounded bg-label-info p-1"><i class="ti ti-chart-pie-2 ti-sm"></i></div>
-                <h6 class="mb-0">Interest</h6>
+                <h6 class="mb-0">Processing Fee</h6>
               </div>
-              <h4 class="my-2 pt-1">$256.34</h4>
+              <h4 class="my-2 pt-1">{{number_format($data['total_processing_fee'])}}</h4>
               <div class="progress w-75" style="height:4px">
                 <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
@@ -163,7 +163,7 @@
                 <div class="badge rounded bg-label-danger p-1"><i class="ti ti-brand-paypal ti-sm"></i></div>
                 <h6 class="mb-0">Expense</h6>
               </div>
-              <h4 class="my-2 pt-1">$74.19</h4>
+              <h4 class="my-2 pt-1">Ksh {{number_format($data['expenses'])}}</h4>
               <div class="progress w-75" style="height:4px">
                 <div class="progress-bar bg-danger" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
@@ -197,7 +197,7 @@
         <div class="row">
           <div class="col-12 col-sm-4 col-md-12 col-lg-4">
             <div class="mt-lg-4 mt-lg-2 mb-lg-4 mb-2 pt-1">
-              <h1 class="mb-0">164</h1>
+              <h1 class="mb-0">{{number_format($data['loan_book'])}}</h1>
               <p class="mb-0">Loan Book Value</p>
             </div>
             <ul class="p-0 m-0">
@@ -205,14 +205,14 @@
                 <div class="badge rounded bg-label-primary p-1"><i class="ti ti-ticket ti-sm"></i></div>
                 <div>
                   <h6 class="mb-0 text-nowrap">Total Issued Loans</h6>
-                  <small class="text-muted">142</small>
+                  <small class="text-muted">{{number_format($data['total_disbursement'])}}</small>
                 </div>
               </li>
               <li class="d-flex gap-3 align-items-center mb-lg-3 pb-1">
                 <div class="badge rounded bg-label-info p-1"><i class="ti ti-circle-check ti-sm"></i></div>
                 <div>
                   <h6 class="mb-0 text-nowrap">Total Repayments</h6>
-                  <small class="text-muted">28</small>
+                  <small class="text-muted">{{number_format($data['total_loan_repayments'])}}</small>
                 </div>
               </li>
               <li class="d-flex gap-3 align-items-center pb-1">
@@ -237,7 +237,7 @@
     <div class="card">
       <div class="card-body d-flex justify-content-between align-items-center">
         <div class="card-title mb-0">
-          <h5 class="mb-0 me-2">86%</h5>
+          <h5 class="mb-0 me-2">{{number_format($data['today_disbursement'])}}</h5>
           <small>Today Disbursements</small>
         </div>
         <div class="card-icon">
@@ -252,7 +252,7 @@
     <div class="card">
       <div class="card-body d-flex justify-content-between align-items-center">
         <div class="card-title mb-0">
-          <h5 class="mb-0 me-2">1.24gb</h5>
+          <h5 class="mb-0 me-2">{{number_format($data['today_repayment'])}}</h5>
           <small>Today Repayments</small>
         </div>
         <div class="card-icon">
@@ -267,7 +267,7 @@
     <div class="card">
       <div class="card-body d-flex justify-content-between align-items-center">
         <div class="card-title mb-0">
-          <h5 class="mb-0 me-2">0.2%</h5>
+          <h5 class="mb-0 me-2">Ksh {{number_format($data['pending_transactions'])}}</h5>
           <small>Pending Approvals</small>
         </div>
         <div class="card-icon">
@@ -312,7 +312,7 @@
   <div class="col-lg-6 mb-4 mb-lg-0">
     <div class="card h-100">
       <div class="card-header d-flex justify-content-between">
-        <h5 class="card-title m-0 me-2">Last Transaction</h5>
+        <h5 class="card-title m-0 me-2">Latest Transaction</h5>
         <div class="dropdown">
           <button class="btn p-0" type="button" id="teamMemberList" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="ti ti-dots-vertical ti-sm text-muted"></i>
@@ -328,13 +328,14 @@
         <table class="table table-borderless border-top">
           <thead class="border-bottom">
             <tr>
-              <th>CARD</th>
-              <th>DATE</th>
-              <th>STATUS</th>
-              <th>TREND</th>
+              <th style="font-size:12px">ID</th>
+              <th style="font-size:12px">DATE</th>
+              <th style="font-size:12px">STATUS</th>
+              <th style="font-size:12px">Amount</th>
             </tr>
           </thead>
           <tbody>
+            @forelse ($data['today_transactions'] as $item)
             <tr>
               <td>
                 <div class="d-flex justify-content-start align-items-center">
@@ -357,94 +358,12 @@
                 <p class="mb-0 fw-semibold">+$1,678</p>
               </td>
             </tr>
-            <tr>
-              <td>
-                <div class="d-flex justify-content-start align-items-center">
-                  <div class="me-3">
-                    <img src="{{asset('assets/img/icons/payments/master-card-img.png')}}" alt="Visa" height="30">
-                  </div>
-                  <div class="d-flex flex-column">
-                    <p class="mb-0 fw-semibold">*5578</p><small class="text-muted">Credit</small>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="d-flex flex-column">
-                  <p class="mb-0 fw-semibold">Sent</p>
-                  <small class="text-muted text-nowrap">12 Feb 2022</small>
-                </div>
-              </td>
-              <td><span class="badge bg-label-danger">Rejected</span></td>
-              <td>
-                <p class="mb-0 fw-semibold">-$839</p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="d-flex justify-content-start align-items-center">
-                  <div class="me-3">
-                    <img src="{{asset('assets/img/icons/payments/american-express-img.png')}}" alt="Visa" height="30">
-                  </div>
-                  <div class="d-flex flex-column">
-                    <p class="mb-0 fw-semibold">*4567</p><small class="text-muted">Credit</small>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="d-flex flex-column">
-                  <p class="mb-0 fw-semibold">Sent</p>
-                  <small class="text-muted text-nowrap">28 Feb 2022</small>
-                </div>
-              </td>
-              <td><span class="badge bg-label-success">Verified</span></td>
-              <td>
-                <p class="mb-0 fw-semibold">+$435</p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="d-flex justify-content-start align-items-center">
-                  <div class="me-3">
-                    <img src="{{asset('assets/img/icons/payments/visa-img.png')}}" alt="Visa" height="30">
-                  </div>
-                  <div class="d-flex flex-column">
-                    <p class="mb-0 fw-semibold">*5699</p><small class="text-muted">Credit</small>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="d-flex flex-column">
-                  <p class="mb-0 fw-semibold">Sent</p>
-                  <small class="text-muted text-nowrap">8 Jan 2022</small>
-                </div>
-              </td>
-              <td><span class="badge bg-label-secondary">Pending</span></td>
-              <td>
-                <p class="mb-0 fw-semibold">+$2,345</p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="d-flex justify-content-start align-items-center">
-                  <div class="me-3">
-                    <img src="{{asset('assets/img/icons/payments/visa-img.png')}}" alt="Visa" height="30">
-                  </div>
-                  <div class="d-flex flex-column">
-                    <p class="mb-0 fw-semibold">*5699</p><small class="text-muted">Credit</small>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <div class="d-flex flex-column">
-                  <p class="mb-0 fw-semibold">Sent</p>
-                  <small class="text-muted text-nowrap">8 Jan 2022</small>
-                </div>
-              </td>
-              <td><span class="badge bg-label-danger">Rejected</span></td>
-              <td>
-                <p class="mb-0 fw-semibold">-$234</p>
-              </td>
-            </tr>
+            @empty
+                
+            @endforelse
+           
+           
+           
           </tbody>
         </table>
       </div>
