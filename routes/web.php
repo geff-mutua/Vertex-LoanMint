@@ -57,6 +57,7 @@ Route::domain('{domain}.localhost')->group(function(){
 
             //Reporting
             Route::get('borrower-statement/{id}',[ReportController::class,'borrowerStatement']);
+            Route::get('borrower-loan/{id}',[ReportController::class,'loanStatement']);
             
         });
     });
