@@ -28,26 +28,31 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12 mb-2">
-            <div class="card-header border-bottom">
-                <div class="d-flex justify-content-between align-items-center row pb-2 gap-3 gap-md-0">
-                    <h5 class="card-title mb-3">Filter Transactions</h5>
-                    <div class="col-md-3 user_role">
-                      <label for="">Date From</label>
-                      <input type="date" class="form-control" name="" id="">
-                    </div>
-                    <div class="col-md-3 user_plan">
-                        <label for="">Date To</label>
-                        <input type="date" class="form-control" name="" id="">
-                    </div>
-                    <div class="col-md-3 user_plan">
-                        <label for="">Business Shortcode</label>
-                        <select id="FilterTransaction" class="form-select text-capitalize">
-                            <option value="Pending" class="text-capitalize">All</option>
-                    
-                        </select>
-                    </div>
-                    <div class="col-md-3 user_status">
+        <div class="col-xl-12 mb-4">
+            <div class="card">
+                <h5 class="card-header">Filter Transactions</h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="d-flex justify-content-between align-items-center row pb-2 gap-3 gap-md-0">
+                            <div class="col-md-3 user_role">
+                              <label for="">Date From</label>
+                              <input type="date" wire:model="date_from" class="form-control" id="">
+                            </div>
+                            <div class="col-md-3 user_plan">
+                                <label for="">Date To</label>
+                                <input type="date" wire:model="date_to" class="form-control" id="">
+                            </div>
+                            <div class="col-md-3 user_plan">
+                                <label for="">Business Shortcode</label>
+                                <select wire:model="shortcode" class="form-select text-capitalize">
+                                    <option value="All" class="text-capitalize">All</option>
+                            
+                                </select>
+                            </div>
+                            <div class="col-md-3 user_status">
+                               
+                            </div>
+                        </div>
                        
                     </div>
                 </div>
@@ -71,8 +76,9 @@
                                 <th style="font-size: 10px">Msisdn</th>
                                 <th style="font-size: 10px">Bill Number</th>
                                 <th style="font-size: 10px">Date</th>
+                                <th style="font-size: 10px">Time</th>
                                 <th style="font-size: 10px">Amount</th>
-                                <th style="font-size: 10px">Org.Balance</th>
+                           
                                 <th style="font-size: 10px">status</th>
                     
                             </tr>
@@ -83,33 +89,40 @@
                                     <td style="font-size:10px">{{ $loop->iteration }}</td>
 
                                     <td style="font-size:12px">
-                                        {{ $item->reference_code }}
+                                        {{ $item->transaction_id }}
                                     </td>
 
                                     <td style="font-size:12px">
-                                        {{ $item->loan->borrower->first_name }}
-                                        {{ $item->loan->borrower->last_name }}
+                                        {{ $item->first_name }}
+                                        {{ $item->middle_name }}
+                                        {{ $item->last_name }}
                                     </td>
                                     <td style="font-size:12px">
-                                        {{ $item->payment_option }}
+                                        {{ $item->business_shortcode }}
+                                    </td>
+                                    <td style="font-size:12px">
+                                        {{ $item->msisdn }}
                                     </td>
 
 
 
+                                   
                                     <td style="font-size:12px">
-                                        {{ \Carbon\Carbon::parse($item->date)->format('Y-M-d') }}
-                                    </td>
-                                    <td style="font-size:12px;text-align:right">
-                                        {{ number_format($item->amount) }}
-                                    </td>
-
-                                    <td style="font-size:12px">
-                                        {{ $item->business_balance }}
+                                        {{ $item->bill_ref_number }}
                                     </td>
                                     <td style="font-size:12px">
-                                        @if ($item->status == '0')
+                                        {{ $item->date }}
+                                    </td>
+                                    <td style="font-size:12px">
+                                        {{ Carbon\Carbon::parse($item->created_at)->format('h:i A') }}
+                                    </td>
+                                    <td style="font-size:12px">
+                                        {{ number_format($item->transaction_amount) }}
+                                    </td>
+                                    <td style="font-size:12px">
+                                        @if ($item->mapped == '0')
                                             <span class="badge bg-label-warning">Pending </span>
-                                        @elseif($item->status == '1')
+                                        @elseif($item->mapped == '1')
                                             <span class="badge bg-label-success">Approved</span>
                                         @else
                                             <span class="badge bg-label-danger">Rejected</span>
@@ -117,13 +130,8 @@
                                     </td>
 
 
-                                    <td style="font-size:12px">
-                                        <small style="font-size:12px; cursor: pointer;" class="text-info"
-                                            data-bs-toggle="modal" wire:click="transactionDetails({{ $item->id }})"
-                                            data-bs-target="#transactionDetails">Details</small>
-                                    </td>
-
-                                    @livewire('content.admin.collections.transactions.transaction-detail')
+                              
+                                    
                                 </tr>
 
                             @empty

@@ -44,6 +44,7 @@
                                 <div class="mb-3 col-md-6">
                                     <label class="form-label">Choose Theme Style </label>
                                     <select name="myStyle" class="form-control">
+                                        <option value="{{$theme?strtoupper($theme->myStyle):''}}">{{$theme?$theme->myStyle:''}}</option>
                                         <option value="light">Light</option>
                                         <option value="dark">Dark</option>
                                     </select>
@@ -51,6 +52,7 @@
                                 <div class="mb-3 col-md-6">
                                     <label class="form-label">Choose Theme Version </label>
                                     <select name="myTheme" class="form-control">
+                                        <option value="{{$theme?$theme->myTheme:''}}">{{$theme?strtoupper($theme->myTheme):''}}</option>
                                         <option value="theme-semi-dark">Semi Dark</option>
                                         <option value="theme-default">Default Version</option>
                                         <option value="theme-bordered">Bordered</option>
@@ -60,6 +62,7 @@
                                 <div class="mb-3 col-md-6">
                                     <label class="form-label">Choose Theme Layout </label>
                                     <select name="myLayout" class="form-control">
+                                        <option value="{{$theme?$theme->myLayout:''}}">{{$theme?strtoupper($theme->myLayout):''}}</option>
                                         <option value="vertical">Vertical</option>
                                         <option value="horizontal">Horizontal</option>
                                         <option value="blank">Blank</option>
@@ -68,6 +71,7 @@
                                 <div class="mb-3 col-md-6">
                                     <label class="form-label">Choose Menu Option </label>
                                     <select name="menuFixed" class="form-control">
+                                 
                                         <option value="1">Fixed</option>
                                         <option value="0">Scrollable</option>
                                         

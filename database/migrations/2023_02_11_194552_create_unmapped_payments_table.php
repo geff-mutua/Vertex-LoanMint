@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('middle_name');
             $table->string('last_name');
+            $table->date('date');
             $table->string('org_account_bal')->nullable();
             $table->boolean('mapped')->default(0); //false;
             $table->timestamps();

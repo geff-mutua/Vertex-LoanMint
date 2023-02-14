@@ -6,6 +6,7 @@ use App\Models\Billing;
 use App\Models\Borrower;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Models\SuspenseAccount;
 use App\Models\UnmappedPayment;
 use Illuminate\Support\Facades\Log;
@@ -40,7 +41,7 @@ class MPESAResponseController extends Controller
             $middleName=$result['MiddleName'];
         }
         if(array_key_exists('LastName',$result)){
-            $middleName=$result['LastName'];
+            $lastName=$result['LastName'];
         }
 
         Log::info($result);
@@ -59,6 +60,7 @@ class MPESAResponseController extends Controller
             'first_name'=>$firstName,
             'middle_name'=>$middleName,
             'last_name'=>$lastName,
+            'date'=>Carbon::now()->toDateString(),
             'org_account_bal'=>$result['OrgAccountBalance']
         ]);
 
