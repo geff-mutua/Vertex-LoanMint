@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('borrower_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('branch_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('posted_by')->nullable();
             $table->string('reference_code');
             $table->string('transaction_type');

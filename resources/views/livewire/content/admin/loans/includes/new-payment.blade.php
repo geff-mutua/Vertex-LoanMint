@@ -11,7 +11,7 @@
                 
                 <form wire:submit.prevent="store">
                     <div class="row ">
-                        <div class="form-group col-md-6 text-left">
+                        <div class="form-group mb-3 col-md-6 text-left">
                             <label class="form-label">Reference Code</label>
                             <input type="text" class="form-control" wire:model="reference_code"
                                 placeholder="Recerence Code">
@@ -20,7 +20,7 @@
                                 <small style="font-size: 10px" class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group mb-3 col-md-6">
                             <label class="form-label">Amount</label>
                             <input type="text" class="form-control" wire:model="amount"
                                 placeholder="Amount "s>
@@ -28,7 +28,7 @@
                             <small style="font-size: 10px" class="text-danger">{{ $message }}</small>
                         @enderror
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group mb-3 col-md-6">
                             <label class="form-label">Msisdn (Phone Number)</label>
                             <input type="text" class="form-control" wire:model="msisdn"
                             placeholder="Msisdn|Mobile"s>
@@ -36,7 +36,7 @@
                                 <small style="font-size: 10px" class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group mb-3 col-md-6">
                             <label class="form-label">Transaction Date</label>
                             <input type="date" class="form-control" wire:model="date"
                             placeholder="Date"s>
@@ -44,7 +44,7 @@
                                 <small style="font-size: 10px" class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
-                        <div class="form-group col-md-12">
+                        <div class="form-group mb-3 col-md-12">
                             <label  class="form-label">Associated Loan</label>
                             <select class="form-control" wire:model="loan_id" id="">
                                 <option value="">--select--</option>
@@ -57,7 +57,7 @@
                                 <small style="font-size: 10px" class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
-                        <div class="form-group col-md-12">
+                        <div class="form-group mb-3 col-md-12">
                             <label  class="form-label">Transaction Type</label>
                             <select class="form-control" wire:model="transaction_type" id="">
                                 <option value="">--select--</option>
@@ -69,7 +69,22 @@
                             @enderror
                            
                         </div>
-                        <div class="form-group col-md-12">
+                        <div class="form-group mb-3 col-md-12">
+                            <label  class="form-label">Select Branch</label>
+                            <select class="form-control" wire:model="branch" id="">
+                                <option value="">--select--</option>
+                                @forelse ($branches as $branch)
+                                    <option value="{{$branch->id}}">{{$branch->name}}</option>
+                                @empty
+                                    
+                                @endforelse
+                            </select>
+                            @error('branch')
+                                <small style="font-size: 10px" class="text-danger">{{ $message }}</small>
+                            @enderror
+                           
+                        </div>
+                        <div class="form-group mb-3 col-md-12">
                             <label class="form-label">Payment Option</label>
                             <select class="form-control" wire:model="payment_method" id="">
                                 <option value="">--select--</option>

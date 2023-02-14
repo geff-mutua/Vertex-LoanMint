@@ -20,7 +20,7 @@ class CompanyMiddleware
         if(Auth::Check()){
            
             if(auth()->user()->company==null){
-                return redirect()->route('setting-company',['domain'=>auth()->user()->domain->name])->withMessage('Company Details are required');;
+                return redirect()->route('setting-company',['domain'=>auth()->user()->domain->name])->withMessage('Fill in the company details to get you started');;
             }elseif(auth()->user()->company->logo==null){
                 return redirect()->route('setting-company',['domain'=>auth()->user()->domain->name])->withMessage('Company Logo is required');
             }

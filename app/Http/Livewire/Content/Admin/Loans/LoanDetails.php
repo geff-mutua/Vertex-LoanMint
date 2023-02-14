@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Content\Admin\Loans;
 
 use App\Models\Loan;
+use App\Models\Branch;
 use Livewire\Component;
 use App\Models\Transaction;
 use App\Models\LoanRepaymentSchedule;
@@ -23,6 +24,9 @@ class LoanDetails extends Component
     public $schedules=[];
     public $repayments=[];
 
+    public $branches=[];
+    public $branch;
+
     protected $rules = [
     'reference_code' => 'required',
     'date'=>'required',
@@ -40,6 +44,7 @@ class LoanDetails extends Component
 
     public function mount($id){
         $this->loan=Loan::find($id);
+        $this->branches=Branch::all();
     }
     public function render()
     {
@@ -76,7 +81,8 @@ class LoanDetails extends Component
             'msisdn'=>$this->msisdn,
             'date'=>$this->date,
             'payment_option'=>$this->payment_method,
-            'loan_id'=>$this->loan_id
+            'loan_id'=>$this->loan_id,
+            'branch_id'=>$this->branch
         ]);
         $this->emit('newPayment');
 

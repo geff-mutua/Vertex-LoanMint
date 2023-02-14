@@ -28,39 +28,52 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12 mb-2">
-            <div class="card-header border-bottom">
-                <div class="d-flex justify-content-between align-items-center row pb-2 gap-3 gap-md-0">
-                    <h5 class="card-title mb-3">Filter Transactions</h5>
-                    <div class="col-md-3 user_role">
-                      <label for="">Date From</label>
-                      <input type="date" class="form-control" name="" id="">
-                    </div>
-                    <div class="col-md-3 user_plan">
-                        <label for="">Date To</label>
-                        <input type="date" class="form-control" name="" id="">
-                    </div>
-                    <div class="col-md-3 user_plan">
-                        <label for="">Branch Name</label>
-                        <select id="FilterTransaction" class="form-select text-capitalize">
-                           
-                            <option value="Pending" class="text-capitalize">Pending</option>
-                            <option value="Active" class="text-capitalize">Active</option>
-                            <option value="Inactive" class="text-capitalize">Inactive</option>
-                            <option value="Inactive" class="text-capitalize">Rejected</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3 user_status">
-                        <label for="">Repayment Status</label>
-                        <select id="FilterTransaction" class="form-select text-capitalize">
-                            <option value=""> Filter By Status</option>
-                            <option value="Pending" class="text-capitalize">All</option>
-                            <option value="Pending" class="text-capitalize">Pending</option>
-                            <option value="Active" class="text-capitalize">Approved</option>
-                            <option value="Inactive" class="text-capitalize">Rejected</option>
-                        </select>
+        <div class="col-xl-12 mb-4">
+            <div class="card">
+                <h5 class="card-header">Filter Transactions</h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="d-flex justify-content-between align-items-center row pb-2 gap-3 gap-md-0">
+                            
+                            <div class="col-md-3 user_role">
+                              <label for="">Date From</label>
+                              <input type="date" wire:model="date_from" class="form-control" id="">
+                            </div>
+                            <div class="col-md-3 user_plan">
+                                <label for="">Date To</label>
+                                <input wire:model="date_to" type="date" class="form-control" id="">
+                            </div>
+                            <div class="col-md-3 user_plan">
+                                <label for="">Branch Name</label>
+                                <select wire:model="branch" class="form-select text-capitalize">
+                                    <option value="All" class="text-capitalize">All</option>
+                                  @forelse ($branches as $item)
+                                  <option value="{{$item->id}}" class="text-capitalize">{{$item->name}}</option>
+                                  @empty
+                                      
+                                  @endforelse
+                                </select>
+                            </div>
+                            <div class="col-md-3 user_status">
+                                <label for="">Repayment Status</label>
+                                <select wire:model="status" class="form-select text-capitalize">
+                                   
+                                    <option value="All" class="text-capitalize">All</option>
+                                    <option value="1" class="text-capitalize">Active</option>
+                                    <option value="0" class="text-capitalize">Pending</option>
+                                    <option value="2" class="text-capitalize">Rejected</option>
+                                  
+                                </select>
+                            </div>
+                        </div>
+                       
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="col-md-12 mb-2">
+            <div class="card-header border-bottom">
+               
             </div>
         </div>
 
@@ -76,14 +89,12 @@
 
                                 <th style="font-size: 10px">Reference</th>
 
-                                <th style="font-size: 10px">Names</th>
-                                <th style="font-size: 10px">Shortcode</th>
-                                <th style="font-size: 10px">Msisdn</th>
-                                <th style="font-size: 10px">Bill Number</th>
+                                <th style="font-size: 10px">Loanee</th>
+                                <th style="font-size: 10px">Loan Id</th>
                                 <th style="font-size: 10px">Date</th>
-                                <th style="font-size: 10px">Amount</th>
-                                <th style="font-size: 10px">Org.Balance</th>
-                                <th style="font-size: 10px">status</th>
+                                <th style="font-size: 10px;text-align:right">Amount</th>
+                                <th style="font-size: 10px">Status</th>
+                                <th style="font-size: 10px">Action</th>
                     
                             </tr>
                         </thead>
@@ -97,11 +108,11 @@
                                     </td>
 
                                     <td style="font-size:12px">
-                                        {{ $item->loan->borrower->first_name }}
-                                        {{ $item->loan->borrower->last_name }}
+                                        {{ $item->loan->borrower->fullname() }}
+                                        
                                     </td>
                                     <td style="font-size:12px">
-                                        {{ $item->payment_option }}
+                                        {{ $item->loan->transaction_code }}
                                     </td>
 
 
@@ -110,12 +121,10 @@
                                         {{ \Carbon\Carbon::parse($item->date)->format('Y-M-d') }}
                                     </td>
                                     <td style="font-size:12px;text-align:right">
-                                        {{ number_format($item->amount) }}
+                                        {{ number_format($item->amount,2) }}
                                     </td>
 
-                                    <td style="font-size:12px">
-                                        {{ $item->business_balance }}
-                                    </td>
+
                                     <td style="font-size:12px">
                                         @if ($item->status == '0')
                                             <span class="badge bg-label-warning">Pending </span>
@@ -138,6 +147,13 @@
 
                             @empty
                             @endforelse
+                            <tr>
+                                <td colspan="4" style="text-align: right;font-weight:bold">TOTAL</td>
+                                <td style="text-align: right;font-weight:bold"></td>
+                                <td  style="font-weight:bold;text-align: right;">{{number_format($summations['total'],2)}}</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
                         </tbody>
 
                     </table>
