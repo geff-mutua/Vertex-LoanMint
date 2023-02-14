@@ -13,13 +13,13 @@
       "menuHeader": "Content"
     },
     {
-      "name": "Clients",
+      "name": "Borrowers",
       "icon": "menu-icon tf-icons ti ti-users",
       "slug": "clients",
       "submenu": [
         {
           "url": "/admin/clients",
-          "name": "Clients",
+          "name": "All Borrowers",
           "slug": "clients-list"
         },
         {
@@ -36,31 +36,75 @@
       "submenu": [
         {
           "url": "/admin/loans",
-          "name": "Individual Loans",
+          "name": "View All Loans",
           "slug": "loans-list"
+        },
+
+        {
+          "url": "/admin/loans/pending",
+          "name": "Pending Loans",
+          "slug": "loans-pending"
+        },
+        {
+          "url": "/admin/loans/active",
+          "name": "Active Loans",
+          "slug": "loans-active"
+        },
+        {
+          "url": "/admin/loans/arrears",
+          "name": "Loan In Arrears",
+          "slug": "loans-arrears"
+        },
+        {
+          "url": "/admin/loans/rejected",
+          "name": "Rejected Loans",
+          "slug": "loans-rejected"
         }
        
       ]
     },
     {
-      "name": "Collections",
+      "name": "Repayments",
       "icon": "menu-icon tf-icons ti ti-coin",
       "slug": "collections",
       "submenu": [
         {
           "url": "/admin/collections",
-          "name": "All Collection",
+          "name": "All Repayments",
           "slug": "collections-list"
+        },
+        {
+          "url": "/admin/collections/mpesa",
+          "name": "Mpesa Repayments",
+          "slug": "collections-mpesa"
+        },
+        {
+          "url": "/admin/collections/mpesa/unmapped",
+          "name": "Unposted Repayments",
+          "slug": "collections-mpesa-unmapped"
         }
        
       ]
     },
     {
-      "name": "Loan Products",
-      "icon": "menu-icon tf-icons ti ti-file",
-      "slug": "loan-products",
-      "url": "admin/loan-products"
+      "name": "Collection Sheets",
+      "icon": "menu-icon tf-icons ti ti-coin",
+      "slug": "collectionsheet",
+      "submenu": [
+        {
+          "url": "/admin/collections/daily",
+          "name": "Daily Collection Sheet",
+          "slug": "collectionsheet-daily"
+        },
+        {
+          "url": "/admin/collections/missed",
+          "name": "Missed Collection Sheet",
+          "slug": "collectionsheet-missed"
+        }
+       
+      ]
     },
+
     {
       "menuHeader": "Settings"
     },
@@ -83,6 +127,12 @@
           "url": "admin/branches",
           "name": "Company Branches",
           "slug": "setting-branches"
+        },
+        {
+          "url": "admin/products",
+          "name": "Loan Products",
+          "slug": "setting-products"
+         
         }
       ]
       

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Branch;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,6 +20,7 @@ class BorrowerFactory extends Factory
         return [
             
             'user_id'=>'1',
+            'branch_id'=>$this->faker->randomElement(Branch::all()->pluck('id')),
             'first_name'=>$this->faker->unique()->name(),
             'last_name'=>$this->faker->unique()->name(),
             'marital_status'=>$this->faker->randomElement(['Married','Single','Divorced']),

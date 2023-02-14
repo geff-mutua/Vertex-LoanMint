@@ -29,6 +29,7 @@ class CompanySetting extends Controller
             'town'=>'required',
             
         ]);
+       
         $file=null;
         $settings=Company::first();
         if(!is_null($request->logo)){
@@ -62,7 +63,7 @@ class CompanySetting extends Controller
             'country'=>$request->country,
             'logo'=>$file,
         ]);
-        Alert::success('Company details has been updated', 'Success Message');
+       
         return redirect()->back();
 
     }

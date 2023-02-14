@@ -1,26 +1,36 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\Report\ReportController;
 use App\Http\Controllers\pages\admin\AdminDashboard;
 use App\Http\Livewire\Content\Admin\Clients\Borrowers;
+use App\Http\Livewire\Content\Admin\Loans\ActiveLoans;
+use App\Http\Livewire\Content\Admin\Loans\ArrearLoans;
 use App\Http\Livewire\Content\Admin\Loans\LoanDetails;
 use App\Http\Livewire\Content\Admin\Products\Products;
+use App\Http\Livewire\Content\Admin\Loans\PendingLoans;
 use App\Http\Livewire\Content\Admin\Clients\AddBorrower;
+use App\Http\Livewire\Content\Admin\Loans\RejectedLoans;
 use App\Http\Livewire\Content\Admin\Loans\IndividualLoan;
 use App\Http\Livewire\Content\Admin\Branches\CompanyBranch;
 use App\Http\Livewire\Content\Admin\Clients\BorrowerProfile;
 use App\Http\Controllers\pages\admin\clients\ClientController;
+use App\Http\Livewire\Content\Admin\Collections\MpesaUnmapped;
 use App\Http\Livewire\Content\Admin\Collections\AllCollections;
 use App\Http\Controllers\pages\admin\settings\theme\ThemeSetting;
+use App\Http\Livewire\Content\Admin\Collections\MpesaCollections;
 use App\Http\Controllers\pages\admin\settings\company\CompanySetting;
 use App\Http\Livewire\Content\Admin\Collections\Transactions\TransactionDetail;
 
 
 $controller_path = 'App\Http\Controllers';
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware('guest')->group(function (){
+	Route::get('/',[LandingPageController::class,'index']);
+    Route::get('/about',[LandingPageController::class,'about']);
+    Route::get('/features',[LandingPageController::class,'features']);
+    Route::get('/pricing',[LandingPageController::class,'pricing']);
 });
 
 // Admin Routes
@@ -38,14 +48,20 @@ Route::domain('{domain}.localhost')->group(function(){
             Route::get('/branches', CompanyBranch::class)->name('setting-branches');
 
             // Products
-            Route::get('/loan-products', Products::class)->name('loan-products');
+            Route::get('/products', Products::class)->name('setting-products');
 
             // Loans
             Route::get('/loans', IndividualLoan::class)->name('loans-list');
+            Route::get('/loans/pending', PendingLoans::class)->name('loans-pending');
+            Route::get('/loans/active', ActiveLoans::class)->name('loans-active');
+            Route::get('/loans/rejected', RejectedLoans::class)->name('loans-rejected');
+            Route::get('/loans/arrears', ArrearLoans::class)->name('loans-arrears');
             Route::get('loan-details/{id}',LoanDetails::class)->name('loan-details');
 
             //Collections
             Route::get('/collections',AllCollections::class)->name('collections-list');
+            Route::get('/collections/mpesa',MpesaCollections::class)->name('collections-mpesa');
+            Route::get('/collections/mpesa/unmapped',MpesaUnmapped::class)->name('collections-mpesa-unmapped');
 
             // Transactions
             Route::get('/transaction/details/{id}',TransactionDetail::class)->name('transaction-detail');

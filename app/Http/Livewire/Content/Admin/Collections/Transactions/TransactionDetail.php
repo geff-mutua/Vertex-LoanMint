@@ -8,30 +8,35 @@ use App\Models\Transaction;
 use Illuminate\Support\Carbon;
 use App\Models\SuspenseAccount;
 use App\Models\BorrowerLoanStatement;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class TransactionDetail extends Component
 {
+    use LivewireAlert;
  
     protected $listeners=['viewDetails'];
     public $transaction;
 
     public function viewDetails($id){
       
+       
         $this->transaction=Transaction::find($id);
     }
     public function render()
     {
+       
         return view('livewire.content.admin.collections.transactions.transaction-detail')->extends('layouts.layoutMaster');
     }
     public function approve(Transaction $approve)
     {
 
         $loan = $approve->loan()->first();
-
+        
         if ($approve->transaction_type == 'Processing Fee') {
             if ($loan->processing_fee == 1) {
                 // Check if the loan is approved or not
                 if ($loan->status == "Approved") {
+     
                     # Get the Fee rate from the loan product
                     $processing_fee_rate = $loan->loanproduct()->first()->procesing_fee_rate;
                     $processingFee = (float) $loan->amount * (float) $processing_fee_rate / 100;
@@ -52,7 +57,7 @@ class TransactionDetail extends Component
                             'name' => $loan->borrower->fullname(),
                             'borrower_id' => $loan->borrower->id,
                             'loan_id' => $loan->id,
-                            'domain_id' => $loan->borrower->domain_id,
+                            
                         ]);
                     }
 
@@ -69,15 +74,22 @@ class TransactionDetail extends Component
                     $account = SubAccount::find(4);
                     $account->transact($processingFee);
                     #==================================================================================================
-                    $this->dispatchBrowserEvent('swal', ['title' => 'Success',
-                        'text' => 'Transaction has been approved successfully',
-                        'icon' => 'success',
-                    ]);
+                    $this->emit('approveTransaction');
+                    $this->alert('success', 'Transaction has been approved successfully.', [
+                        'position' => 'top-end',
+                        'timer' => 3000,
+                        'toast' => true,
+                       ]);
+                    
                 } else {
-                    $this->dispatchBrowserEvent('swal', ['title' => 'Failed',
-                        'text' => 'This loan number ' . $loan->transaction_code . ' for client ' . $loan->borrower->first_name . ' ' . $loan->borrower->last_name . ' has not been approved yet. kindly approve the loan and come back to approve the transaction.',
-                        'icon' => 'error',
-                    ]);
+                    //Notify that the loan is not approved first
+                    $this->emit('approveTransaction');
+                    $this->alert('error', 'This loan number ' . $loan->transaction_code . ' for client ' . $loan->borrower->first_name . ' ' . $loan->borrower->last_name . ' has not been approved yet. kindly approve the loan and come back to approve the transaction.', [
+                        'position' => 'center',
+                        'timer' => 10000,
+                        'toast' => false,
+                       ]);
+                    
                 }
 
             } else {

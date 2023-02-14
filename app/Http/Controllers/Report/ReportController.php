@@ -168,7 +168,7 @@ class ReportController extends Controller
         PDF::Cell(20,6,'Mobile No: ',0,0,'L',0);
         PDF::Cell(100,6,'+254 '.$client->mobile,0,0,'L',0);
         PDF::Cell(25,6,'Client Branch: ',0,0,'L',0);
-        PDF::Cell(20,6,$client->officer->branch->name,0,0,'L',0);
+        PDF::Cell(20,6,$client->branch->name,0,0,'L',0);
         
         PDF::Ln(6);
         PDF::Cell(20,6,'National Id: ',0,0,'L',0);

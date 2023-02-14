@@ -7,12 +7,12 @@ use Livewire\Component;
 
 class CompanyBranch extends Component
 {
-    public $name, $location, $branch_id;
+    public $name, $address, $email,$mobile, $branch_id;
     public $branches = [];
 
     protected $rules = [
-        'name' => 'required|min:3',
-        'location' => 'required',
+        'name' => 'required|min:1',
+        'address' => 'required',
     ];
 
     public function updated($propertyName)
@@ -25,19 +25,23 @@ class CompanyBranch extends Component
         $this->validate();
         Branch::updateOrCreate(['id' => $this->branch_id], [
             'name' => $this->name,
-            'location' => $this->location,
+            'address' => $this->address,
+            'email'=>$this->email,
+            'mobile'=>$this->mobile
         ]);
 
         $this->emit('branchCreated');
         $this->name = null;
-        $this->location = null;
+        $this->address = null;
 
     }
     public function editBranch(Branch $branch)
     {
         $this->branch_id = $branch->id;
         $this->name = $branch->name;
-        $this->location = $branch->location;
+        $this->address = $branch->address;
+        $this->email=$branch->email;
+        $this->mobile=$branch->mobile;
     }
 
     public function render()

@@ -127,6 +127,58 @@
                         <div class="onboarding-info">Due Date:{{ $loan->due_date }} </div>
                     </div>
                 </div>
+                <div class="d-flex justify-content-end">
+                    @if($loan->status=='Pending')
+                   
+                    <button wire:click="editLoan({{$loan->id}})"
+                        data-bs-toggle="modal" data-bs-target="#editLoan{{$loan->id}}" class="btn btn-sm btn-warning pr-2">Edit Loan</button>
+                    @endif
+
+
+                    @if($loan->processing_fee=="2")
+                    @if($loan->status=="Approved")
+                    @if($loan->disbursement_status=="0")
+                    
+                    <button wire:click="editLoan({{$loan->id}})"
+                        data-bs-toggle="modal" data-bs-target="#updateDisbursment{{$loan->id}}" class="btn btn-sm btn-info">Update Disbursement</button>
+                    |
+                    @else
+
+                    @endif
+                    @endif
+                    @endif
+
+
+                    @if(Carbon\Carbon::now() > Carbon\Carbon::parse($loan->due_date))
+                    @if($loan->status !="Paid")
+                    <a href="javascript:void(0)" wire:click="reschedule({{$loan->id}}) "
+                        data-toggle="modal" data-target="#reschedule{{$loan->id}}">
+                        <small class="text-xs text-info"><b>Reschedule</b></small>
+                    </a>
+                    |
+                    @endif
+                    @endif
+                    @if($loan->status=='Pending' | $loan->status=='Approved' | $loan->status=='Rejected')
+               
+                     <button
+                        wire:click="setDeleteId({{$loan->id}})"
+                        data-bs-toggle="modal" data-bs-target="#deleteLoan{{$loan->id}}" class="btn btn-sm btn-danger">Delete</button>
+                    
+                    @endif
+
+                   
+                        @if($loan->status=='Pending')
+                       
+
+                        <button
+                        wire:click="setDeleteId({{$loan->id}})"
+                        data-bs-toggle="modal" data-bs-target="#approveLoan{{$loan->id}}" class="btn btn-sm btn-success">Approve </button>
+                        
+                        @endif
+                   
+               
+                    
+                </div>
             </div>
             <hr>
      

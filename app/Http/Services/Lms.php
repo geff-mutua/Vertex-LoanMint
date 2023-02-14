@@ -94,7 +94,7 @@ class Lms{
             if($value->status=='Active'){ 
                 # Populate the Branches
                 foreach($this->branches as $branch){
-                    if($value->borrower->officer->branch->id ==$branch->id){
+                    if($value->borrower->branch->id ==$branch->id){
                       (int) $this->loan_by_branches[$branch->branch_name]+=(int)$value->amount;  
                     }
                 }

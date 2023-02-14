@@ -14,6 +14,11 @@ class Borrower extends Model
     public function officer(){
         return $this->belongsTo(User::class,'user_id');
     }
+
+    public function branch(){
+        return $this->belongsTo(Branch::class);
+    }
+
     public function loan(){
         return $this->hasMany(Loan::class);
     }

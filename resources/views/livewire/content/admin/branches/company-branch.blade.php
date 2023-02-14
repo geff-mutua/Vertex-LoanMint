@@ -47,7 +47,9 @@
                     <tr>
                         <th class="text-white" style="font-size: 10px">#</th>
                         <th class="text-white" style="font-size: 10px">Name</th>
-                        <th class="text-white" style="font-size: 10px">Location</th>
+                        <th class="text-white" style="font-size: 10px">Address</th>
+                        <th class="text-white" style="font-size: 10px">Mobile</th>
+                        <th class="text-white" style="font-size: 10px">Email</th>
                         <th class="text-white" style="font-size: 10px">Action</th>
                     </tr>
                 </thead>
@@ -56,7 +58,9 @@
                         <tr>
                             <td><small class="text-xs">{{$loop->iteration}}</small></td>
                             <td><small class="text-xs">{{$branch->name}}</small></td>
-                            <td><small class="text-xs">{{$branch->location}}</small></td>
+                            <td><small class="text-xs">{{$branch->address}}</small></td>
+                            <td><small class="text-xs">{{$branch->mobile}}</small></td>
+                            <td><small class="text-xs">{{$branch->email}}</small></td>
                            <td>
                             <button wire:click="editBranch({{$branch}})" class="text-warning btn btn-xs text-xs" data-bs-toggle="modal" data-bs-target="#editModal{{$branch->id}}">
                                 Edit

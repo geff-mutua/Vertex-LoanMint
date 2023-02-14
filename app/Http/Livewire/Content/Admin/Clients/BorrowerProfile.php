@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Content\Admin\Clients;
 use App\Models\Loan;
 use Livewire\Component;
 use App\Models\Borrower;
+use App\Models\SubAccount;
 use App\Models\LoanProduct;
 use App\Models\Transaction;
 use Illuminate\Support\Carbon;

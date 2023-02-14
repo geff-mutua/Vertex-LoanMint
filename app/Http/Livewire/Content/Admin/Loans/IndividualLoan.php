@@ -76,6 +76,10 @@ class IndividualLoan extends Component
                 $this->total_paid+=(float) $loan->total;
             }
         });
+        $this->summations['active']=$this->total_active;
+        $this->summations['rejected']=$this->total_rejected;
+        $this->summations['arrears']=$this->total_arrears;
+        $this->summations['paid']=$this->total_paid;
         // $this->unApprovedloans=Loan::whereStatus("Pending")->get();
 
       

@@ -81,17 +81,17 @@
                     <table class="table" id="dataTable1">
                         <thead>
                             <tr>
-                                <th class="text-white" style="font-size: 10px">#</th>
+                                <th style="font-size: 10px">#</th>
 
-                                <th class="text-white" style="font-size: 10px">Reference</th>
+                                <th style="font-size: 10px">Reference</th>
 
-                                <th class="text-white" style="font-size: 10px">Client</th>
-                                <th class="text-white" style="font-size: 10px">Payment</th>
-                                <th class="text-white" style="font-size: 10px">Date</th>
-                                <th class="text-white" style="font-size: 10px">Amount</th>
-                                <th class="text-white" style="font-size: 10px">Business Balance</th>
-                                <th class="text-white" style="font-size: 10px">status</th>
-                                <th class="text-white" style="font-size: 10px">Action</th>
+                                <th style="font-size: 10px">Client</th>
+                                <th style="font-size: 10px">Payment</th>
+                                <th style="font-size: 10px">Date</th>
+                                <th style="font-size: 10px">Amount</th>
+                                <th style="font-size: 10px">Business Balance</th>
+                                <th style="font-size: 10px">status</th>
+                                <th style="font-size: 10px">Action</th>
                             </tr>
                         </thead>
                         <tbody>

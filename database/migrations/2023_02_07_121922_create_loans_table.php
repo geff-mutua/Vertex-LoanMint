@@ -20,7 +20,7 @@ return new class extends Migration
             $table->float('amount',12,2);
             $table->float('interest',12,2);
             $table->float('total',12,2);
-            
+            $table->string('account_id')->nullable();
             $table->string('transaction_code');
             $table->boolean('disbursement_status')->default(0);
             $table->string('loan_purpose');
@@ -29,7 +29,7 @@ return new class extends Migration
             $table->timestamp('date'); // Issue Date
             $table->timestamp('due_date')->nullable();
             $table->integer('approved_by')->nullable(); //Approved By
-            $table->longText('reject_reason');
+            $table->longText('reject_reason')->nullable();
             $table->timestamps();
         });
     }

@@ -24,6 +24,12 @@
                     The profile of the client {{ $borrower->fullname() }} is not yet approved.
                 </div>
             </div>
+            @elseif($borrower->status == 2)
+            <div class="col-md-12">
+                <div class="alert alert-danger" role="alert">
+                    The borrower profile is rejected
+                </div>
+            </div>
         @endif
         <!-- View sales -->
         <div class="col-xl-4 mb-4 col-lg-5 col-12">
@@ -163,8 +169,21 @@
                                     </div>
                                     <div class="chart-statistics">
                                         @if ($borrower->status == 0)
-                                            <button wire:click="approve" class="btn btn-info btn-sm">Approve Account</button>
-                                            <button wire:click="reject" class="btn btn-danger btn-sm">Reject Account</button>
+                                        <button wire:click="approve" class="btn btn-info btn-sm" type="button">
+                                            <div wire:loading wire:target="approve">
+                                                <span class="spinner-border me-1" role="status" aria-hidden="true"></span>
+                                            </div>
+                                            Approve Account
+                                          </button>
+
+                                          <button wire:click="reject" class="btn btn-danger btn-sm" type="button">
+                                            <div wire:loading wire:target="reject">
+                                                <span class="spinner-border me-1" role="status" aria-hidden="true"></span>
+                                            </div>
+                                            Reject Account
+                                          </button>
+                                           
+                                           
                                         @else
                                             <button class="btn btn-primary btn-sm">View Details</button>
                                             <button class="btn btn-danger btn-sm mt-2">Flag Account</button>
@@ -259,7 +278,7 @@
                                 @if($value->status=="Approved")
                                 @if($value->disbursement_status=="0")
                                 <a href="javascript:void(0)" wire:click="editLoan({{$value->id}})"
-                                    data-toggle="modal" data-target="#disburse{{$value->id}}">
+                                    data-bs-toggle="modal" data-bs-target="#updateDisbursment{{$value->id}}">
                                     <small class="text-xs text-info"><b>Disburment Update</b></small>
                                 </a>
                                 |
@@ -305,7 +324,7 @@
                             </td>
                             @include('livewire.content.admin.clients.includes.edit-loan')
                             @include('livewire.content.admin.clients.includes.delete-loan')
-                            {{-- @include('livewire.admin.loans.options.disburse-update') --}}
+                            @include('livewire.content.admin.clients.includes.update-disbursement')
                             @include('livewire.content.admin.clients.includes.approve-loan')
                             {{-- @include('livewire.admin.loans.options.reschedule-loan') --}}
                             

@@ -225,17 +225,17 @@
                             @endif
                         </td>
                         <td class="align-middle text-center">
-                            <span class="text-secondary text-xs" style="font-size: 12px">{{ number_format($value->total
+                            <span class=" text-xs" style="font-size: 12px">{{ number_format($value->total
                                 ,2)}}</span>
                         </td>
                         <td class="align-middle text-center">
                            
-                            <span class="text-secondary text-xs"style="font-size: 12px">{{ number_format($value->statement()->where('action','Loan Repayment')->sum('amount')
+                            <span class=" text-xs"style="font-size: 12px">{{ number_format($value->statement()->where('action','Loan Repayment')->sum('amount')
                                 ,2)}}</span>
                         </td>
                         {{-- LOAN BALANCE --}}
                         <td class="align-middle text-center">
-                            <span class="text-secondary text-xs"style="font-size: 12px">{{ 
+                            <span class=" text-xs"style="font-size: 12px">{{ 
                                 number_format($value->statement()->latest()->first()?$value->statement()->latest()->first()->balance:0,
                                 2) }}</span>
                         </td>
@@ -244,13 +244,13 @@
                         
                         -center">
                             <span style="font-size: 12px"
-                                class="text-secondary text-xs">{{Carbon\Carbon::parse($value->date)->format('d/m/Y')
+                                class=" text-xs">{{Carbon\Carbon::parse($value->date)->format('d/m/Y')
                                 }}</span>
                         </td>
                         {{-- MATURITY DATE --}}
                         <td class="align-middle text-center">
                             <span style="font-size: 12px"
-                                class="text-secondary text-xs">{{Carbon\Carbon::parse($value->due_date)->format('d/m/Y')
+                                class=" text-xs">{{Carbon\Carbon::parse($value->due_date)->format('d/m/Y')
                                 }}</span>
                         </td>
                         <td class="align-middle text-center text-sm" style="font-size: 12px">
@@ -265,7 +265,7 @@
                         </td>
                         <td style="font-size: 12px">
                            
-                            <a href="{{route('borrower-profile',['domain'=>auth()->user()->domain->name,'id'=>$value->borrower->id])}}"
+                            <a href="{{route('loan-details',['domain'=>auth()->user()->domain->name,'id'=>$value->id])}}"
                                >
                                 <small class="text-xs text-info"style="font-size: 12px" ><b>View</b></small>
                             </a>

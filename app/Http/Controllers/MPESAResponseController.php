@@ -45,15 +45,7 @@ class MPESAResponseController extends Controller
 
         Log::info($result);
 
-        # Get the company with the registered Shortcode coming from the payload
-        $domain_id='';
-        $company=Billing::where('shortcode',$result['BusinessShortCode'])->first();
-        if(!is_null($company)){
-            $domain_id=$company->domain_id;
-        }else{
-            $domain_id='1';// testing Domain Accunt
-        }
-    
+        #Safe the payload to Unmapped Table
         $data=UnmappedPayment::create([
             'transaction_type'=>$result['TransactionType'],
             'transaction_id'=>$result['TransID'],
@@ -67,7 +59,6 @@ class MPESAResponseController extends Controller
             'first_name'=>$firstName,
             'middle_name'=>$middleName,
             'last_name'=>$lastName,
-            'domain_id'=>$domain_id,
             'org_account_bal'=>$result['OrgAccountBalance']
         ]);
 
@@ -97,7 +88,6 @@ class MPESAResponseController extends Controller
                             # Paid - Extra Amount to loan Repayment
                             if($loan->status=="Approved"){
                                 Transaction::create([
-                                    'domain_id'=>$client->domain_id,
                                     'borrower_id'=>$client->id,
                                     'reference_code'=>$data->transaction_id,
                                     'transaction_type'=>'Processing Fee',
@@ -157,7 +147,7 @@ class MPESAResponseController extends Controller
                         }elseif((int) $data->transaction_amount == (int) $processingFee){
                            if($loan->status=="Approved"){
                                 Transaction::create([
-                                    'domain_id'=>$client->domain_id,
+                                    
                                     'borrower_id'=>$client->id,
                                     'reference_code'=>$data->transaction_id,
                                     'transaction_type'=>'Processing Fee',
@@ -185,6 +175,8 @@ class MPESAResponseController extends Controller
                                     'date'=>Carbon::now(),
                         
                                 ]);
+
+                                //Todo {Notify clients with sms}
                            }
                         }else{
                             # TODO
@@ -197,7 +189,7 @@ class MPESAResponseController extends Controller
                         $statement=BorrowerLoanStatement::where('borrower_id',$client->id)->orderBy('id','DESC')->first();
                         $loanBalance=(int)$statement->balance - (int) $data->transaction_amount;
                         Transaction::create([
-                            'domain_id'=>$client->domain_id,
+                            
                             'borrower_id'=>$client->id,
                             'reference_code'=>$data->transaction_id,
                             'transaction_type'=>'Loan Repayment',
@@ -230,7 +222,7 @@ class MPESAResponseController extends Controller
                                 'name'=>$firstName.' '.$middleName.' '.$lastName,
                                 'borrower_id'=>$client->id,
                                 'loan_id'=>$loan->id,
-                                'domain_id'=>$client->domain_id,
+                               
                             ]);
 
                             
@@ -258,7 +250,7 @@ class MPESAResponseController extends Controller
                 }
 
             }else{
-
+                // The transaction Remains Unmapped
             }
         }
       

@@ -21,8 +21,9 @@ return new class extends Migration
             $table->string('transaction_type');
             $table->integer('amount');
             $table->string('msisdn');
-            $table->timestamp('date');
+            $table->date('date');
             $table->string('payment_option');
+            $table->string('subaccount_id')->nullable();
             $table->string('account_id')->nullable();
             $table->foreignId('loan_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->boolean('status')->default(0); //0=>unapproved 1=Approved 2=Rejected

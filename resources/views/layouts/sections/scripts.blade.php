@@ -27,10 +27,9 @@
 
 <script>
     window.addEventListener('swal', function(e){
-      Swal.fire(e.detail);
-    });
-  </script>
-
+    Swal.fire(e.detail);
+  });
+</script>
 <!-- END: Theme JS-->
 <!-- Pricing Modal JS-->
 @stack('pricing-script')
@@ -38,5 +37,11 @@
 <!-- BEGIN: Page JS-->
 @yield('page-script')
 <!-- END: Page JS-->
+
 @livewireScripts
+<script src="{{asset('js/sweetAlert.js')}}"></script>
+  
+<x-livewire-alert::scripts />
+<script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script> 
+<x-livewire-alert::flash />
 @include('js.scripts')

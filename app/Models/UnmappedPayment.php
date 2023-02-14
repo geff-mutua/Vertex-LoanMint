@@ -9,4 +9,5 @@ class UnmappedPayment extends Model
 {
     use HasFactory;
     protected $guarded=[];
+    
 }

@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form wire:submit.prevent="store">
+                <form>
                 <div class="row">
                     <div class="col mb-3">
                         <label for="nameBasic" class="form-label">Name</label>
@@ -15,10 +15,24 @@
                         }}</small> @enderror
                     </div>
                 </div>
-                <div class="row">
+                <div class="row mb-3">
                     <div class="col mb-0">
-                        <label for="emailBasic" class="form-label">Branch Location</label>
-                        <select class="form-control" wire:model="location" id="">
+                        <label for="emailBasic" class="form-label">Branch Email</label>
+                        <input type="text" wire:model="email" class="form-control" placeholder="Branch Email">
+                    </div>
+                   
+                </div>
+                <div class="row mb-3">
+                    <div class="col mb-0">
+                        <label for="emailBasic" class="form-label">Branch Mobile No</label>
+                        <input type="text" wire:model="mobile" class="form-control" placeholder="Branch Mobile">
+                    </div>
+                   
+                </div>
+                <div class="row mb-3">
+                    <div class="col mb-0">
+                        <label for="emailBasic" class="form-label">Branch Adddress</label>
+                        <select class="form-control" wire:model="address" id="">
                             @include('components.counties')
                         </select>
                     </div>
@@ -26,9 +40,14 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
-                <button  class="btn btn-primary">Save changes</button>
-            </div>
+                <button wire:click="store" class="btn btn-primary" type="button">
+                    <div wire:loading wire:target="store">
+                        <span class="spinner-border me-1" role="status" aria-hidden="true"></span>
+                    </div>
+                    Save Changes
+                  </button>
+                
+              
         </form>
         </div>
     </div>

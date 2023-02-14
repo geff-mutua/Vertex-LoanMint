@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form wire:submit.prevent="store">
+                <form >
                 <div class="row">
                     <div class="col mb-3">
                         <label for="nameBasic" class="form-label">Name</label>
@@ -28,7 +28,12 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
+                <button wire:click="store" class="btn btn-primary" type="button">
+                    <div wire:loading wire:target="store">
+                        <span class="spinner-border me-1" role="status" aria-hidden="true"></span>
+                    </div>
+                    Save Changes
+                  </button>
                 <button type="submit" class="btn btn-primary">Update changes</button>
             </div>
         </form>

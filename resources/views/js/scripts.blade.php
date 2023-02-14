@@ -30,6 +30,12 @@
 </script>
 
 <script>
+    window.livewire.on('approveTransaction',() => {
+        $('#transactionDetails').modal('hide');     
+    });
+</script>
+
+<script>
     window.livewire.on('newPayment',() => {
         $('#newPayment').modal('hide');
     });
