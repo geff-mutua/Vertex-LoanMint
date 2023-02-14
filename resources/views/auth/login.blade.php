@@ -166,7 +166,7 @@ $configData = Helper::appClasses();
 
         <p class="text-center">
           <span>New on our platform?</span>
-          <a href="{{url('auth/register-cover')}}">
+          <a href="#">
             <span>Create an account</span>
           </a>
         </p>
