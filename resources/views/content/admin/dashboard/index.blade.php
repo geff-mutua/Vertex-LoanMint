@@ -23,8 +23,10 @@
 @endsection
 
 @section('page-script')
-<script src="{{asset('assets/js/dashboards-analytics.js')}}"></script>
-<script src="{{asset('assets/js/charts-apex.js')}}"></script>
+{{-- <scrip src="{{asset('assets/js/dashboards-analytics.js')}}"></script> --}}
+@include('js.dashboardChart')
+
+{{-- <script src="{{asset('assets/js/charts-apex.js')}}"></script> --}}
 @endsection
 
 
@@ -212,7 +214,7 @@
                 <div class="badge rounded bg-label-info p-1"><i class="ti ti-circle-check ti-sm"></i></div>
                 <div>
                   <h6 class="mb-0 text-nowrap">Total Repayments</h6>
-                  <small class="text-muted">{{number_format($data['total_loan_repayments'])}}</small>
+                  <small class="text-muted">{{number_format($data['total_repayment'])}}</small>
                 </div>
               </li>
               <li class="d-flex gap-3 align-items-center pb-1">
@@ -282,7 +284,7 @@
     <div class="card">
       <div class="card-body d-flex justify-content-between align-items-center">
         <div class="card-title mb-0">
-          <h5 class="mb-0 me-2">128</h5>
+          <h5 class="mb-0 me-2">{{number_format($data['pending_disbursement'])}}</h5>
           <small>Pending Disbursements</small>
         </div>
         <div class="card-icon">
@@ -312,15 +314,15 @@
   <div class="col-lg-6 mb-4 mb-lg-0">
     <div class="card h-100">
       <div class="card-header d-flex justify-content-between">
-        <h5 class="card-title m-0 me-2">Latest Transaction</h5>
+        <h5 class="card-title m-0 me-2">Latest Repayments</h5>
         <div class="dropdown">
           <button class="btn p-0" type="button" id="teamMemberList" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="ti ti-dots-vertical ti-sm text-muted"></i>
           </button>
           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="teamMemberList">
-            <a class="dropdown-item" href="javascript:void(0);">Download</a>
-            <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
-            <a class="dropdown-item" href="javascript:void(0);">Share</a>
+            <a class="dropdown-item" href="{{route('collections-list',['domain'=>auth()->user()->domain->name])}}">All Repayments</a>
+            <a class="dropdown-item" href="{{route('collections-mpesa-unmapped',['domain'=>auth()->user()->domain->name])}}">Unmapped Payments</a>
+           
           </div>
         </div>
       </div>
@@ -328,34 +330,40 @@
         <table class="table table-borderless border-top">
           <thead class="border-bottom">
             <tr>
-              <th style="font-size:12px">ID</th>
+              <th style="font-size:12px">Reference </th>
               <th style="font-size:12px">DATE</th>
               <th style="font-size:12px">STATUS</th>
               <th style="font-size:12px">Amount</th>
             </tr>
           </thead>
           <tbody>
-            @forelse ($data['today_transactions'] as $item)
+            @forelse ($data['recent_repayments'] as $item)
             <tr>
               <td>
                 <div class="d-flex justify-content-start align-items-center">
-                  <div class="me-3">
-                    <img src="{{asset('assets/img/icons/payments/visa-img.png')}}" alt="Visa" height="30">
-                  </div>
+                  
                   <div class="d-flex flex-column">
-                    <p class="mb-0 fw-semibold">*4230</p><small class="text-muted">Credit</small>
+                    <p class="mb-0 fw-semibold">{{$item->reference_code}}</p><small class="text-muted">{{$item->msisdn}}</small>
                   </div>
                 </div>
               </td>
               <td>
                 <div class="d-flex flex-column">
-                  <p class="mb-0 fw-semibold">Sent</p>
-                  <small class="text-muted text-nowrap">17 Mar 2022</small>
+                  <p class="mb-0 fw-semibold">{{$item->transaction_type}}</p>
+                  <small class="text-muted text-nowrap">{{Carbon\Carbon::parse($item->updated_at)->diffForHumans()}}</small>
                 </div>
               </td>
-              <td><span class="badge bg-label-success">Verified</span></td>
               <td>
-                <p class="mb-0 fw-semibold">+$1,678</p>
+                @if ($item->status == '0')
+                <span class="badge bg-label-warning">Pending </span>
+              @elseif($item->status == '1')
+                  <span class="badge bg-label-success">Approved</span>
+              @else
+                  <span class="badge bg-label-danger">Rejected</span>
+              @endif
+              </td>
+              <td>
+                <p class="mb-0 fw-semibold">+ {{number_format($item->amount)}}</p>
               </td>
             </tr>
             @empty

@@ -90,6 +90,7 @@ class MPESAResponseController extends Controller
                             # Paid - Extra Amount to loan Repayment
                             if($loan->status=="Approved"){
                                 Transaction::create([
+                                    'branch_id'=>$client->branch_id,
                                     'borrower_id'=>$client->id,
                                     'reference_code'=>$data->transaction_id,
                                     'transaction_type'=>'Processing Fee',
@@ -134,6 +135,7 @@ class MPESAResponseController extends Controller
                                 // payment has been received but the loan has not been approved.
                                 # Put the transaction to Pending Transaction
                                 Transaction::create([
+                                    'branch_id'=>$client->branch_id,
                                     'domain_id'=>$client->domain_id,
                                     'borrower_id'=>$client->id,
                                     'reference_code'=>$data->transaction_id,
@@ -149,7 +151,7 @@ class MPESAResponseController extends Controller
                         }elseif((int) $data->transaction_amount == (int) $processingFee){
                            if($loan->status=="Approved"){
                                 Transaction::create([
-                                    
+                                    'branch_id'=>$client->branch_id,
                                     'borrower_id'=>$client->id,
                                     'reference_code'=>$data->transaction_id,
                                     'transaction_type'=>'Processing Fee',
@@ -191,7 +193,7 @@ class MPESAResponseController extends Controller
                         $statement=BorrowerLoanStatement::where('borrower_id',$client->id)->orderBy('id','DESC')->first();
                         $loanBalance=(int)$statement->balance - (int) $data->transaction_amount;
                         Transaction::create([
-                            
+                            'branch_id'=>$client->branch_id,
                             'borrower_id'=>$client->id,
                             'reference_code'=>$data->transaction_id,
                             'transaction_type'=>'Loan Repayment',
@@ -233,7 +235,13 @@ class MPESAResponseController extends Controller
                             $data->mapped=1;
                             $data->save();
 
-                        }else{
+                        }elseif((int)$loanBalance==0){
+                            $loan->status="Paid";
+                            $loan->save();
+                            $data->mapped=1;
+                            $data->save();
+                        }
+                        else{
                             // Client Statement from the payment
                             BorrowerLoanStatement::create([
                                 'borrower_id'=>$client->id,

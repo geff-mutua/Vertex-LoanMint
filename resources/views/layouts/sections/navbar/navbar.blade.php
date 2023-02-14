@@ -54,29 +54,29 @@ $navbarDetached = ($navbarDetached ?? '');
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
               <li>
-                <a class="dropdown-item" href="{{url('lang/en')}}" data-language="en">
+                <a class="dropdown-item" href="#" data-language="en">
                   <i class="fi fi-us fis rounded-circle me-1 fs-3"></i>
                   <span class="align-middle">English</span>
                 </a>
               </li>
-              <li>
-                <a class="dropdown-item" href="{{url('lang/fr')}}" data-language="fr">
+              {{-- <li>
+                <a class="dropdown-item" href="#" data-language="fr">
                   <i class="fi fi-fr fis rounded-circle me-1 fs-3"></i>
                   <span class="align-middle">French</span>
                 </a>
               </li>
               <li>
-                <a class="dropdown-item" href="{{url('lang/de')}}" data-language="de">
+                <a class="dropdown-item" href="#" data-language="de">
                   <i class="fi fi-de fis rounded-circle me-1 fs-3"></i>
                   <span class="align-middle">German</span>
                 </a>
               </li>
               <li>
-                <a class="dropdown-item" href="{{url('lang/pt')}}" data-language="pt">
+                <a class="dropdown-item" href="#" data-language="pt">
                   <i class="fi fi-pt fis rounded-circle me-1 fs-3"></i>
                   <span class="align-middle">Portuguese</span>
                 </a>
-              </li>
+              </li> --}}
             </ul>
           </li>
           <!--/ Language -->
@@ -101,7 +101,7 @@ $navbarDetached = ($navbarDetached ?? '');
                   <a href="javascript:void(0)" class="dropdown-shortcuts-add text-body" data-bs-toggle="tooltip" data-bs-placement="top" title="Add shortcuts"><i class="ti ti-sm ti-apps"></i></a>
                 </div>
               </div>
-              <div class="dropdown-shortcuts-list scrollable-container">
+              {{-- <div class="dropdown-shortcuts-list scrollable-container">
                 <div class="row row-bordered overflow-visible g-0">
                   <div class="dropdown-shortcuts-item col">
                     <span class="dropdown-shortcuts-icon rounded-circle mb-2">
@@ -166,7 +166,7 @@ $navbarDetached = ($navbarDetached ?? '');
                     <small class="text-muted mb-0">Useful Popups</small>
                   </div>
                 </div>
-              </div>
+              </div> --}}
             </div>
           </li>
           <!-- Quick links -->
@@ -175,7 +175,7 @@ $navbarDetached = ($navbarDetached ?? '');
           <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
               <i class="ti ti-bell ti-md"></i>
-              <span class="badge bg-danger rounded-pill badge-notifications">5</span>
+              <span class="badge bg-danger rounded-pill badge-notifications">0</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end py-0">
               <li class="dropdown-menu-header border-bottom">
@@ -185,7 +185,7 @@ $navbarDetached = ($navbarDetached ?? '');
                 </div>
               </li>
               <li class="dropdown-notifications-list scrollable-container">
-                <ul class="list-group list-group-flush">
+                {{-- <ul class="list-group list-group-flush">
                   <li class="list-group-item list-group-item-action dropdown-notifications-item">
                     <div class="d-flex">
                       <div class="flex-shrink-0 me-3">
@@ -348,7 +348,7 @@ $navbarDetached = ($navbarDetached ?? '');
                       </div>
                     </div>
                   </li>
-                </ul>
+                </ul> --}}
               </li>
               <li class="dropdown-menu-footer border-top">
                 <a href="javascript:void(0);" class="dropdown-item d-flex justify-content-center text-primary p-2 h-px-40 mb-1 align-items-center">
@@ -392,69 +392,21 @@ $navbarDetached = ($navbarDetached ?? '');
                 <div class="dropdown-divider"></div>
               </li>
               <li>
-                <a class="dropdown-item" href="{{ Route::has('profile.show') ? route('profile.show') : url('pages/profile-user') }}">
+                <a class="dropdown-item" href="{{ Route::has('profile.show') ? route('profile.show') : url('/') }}">
                   <i class="ti ti-user-check me-2 ti-sm"></i>
                   <span class="align-middle">My Profile</span>
                 </a>
               </li>
-              @if (Auth::check() && Laravel\Jetstream\Jetstream::hasApiFeatures())
+
               <li>
-                <a class="dropdown-item" href="{{ route('api-tokens.index') }}">
-                  <i class='ti ti-key me-2 ti-sm'></i>
-                  <span class="align-middle">API Tokens</span>
-                </a>
-              </li>
-              @endif
-              <li>
-                <a class="dropdown-item" href="{{url('app/invoice/list')}}">
+                <a class="dropdown-item" href="#">
                   <span class="d-flex align-items-center align-middle">
                     <i class="flex-shrink-0 ti ti-credit-card me-2 ti-sm"></i>
                     <span class="flex-grow-1 align-middle">Billing</span>
                     <span class="flex-shrink-0 badge badge-center rounded-pill bg-label-danger w-px-20 h-px-20">2</span>
                   </span> </a>
               </li>
-              @if (Auth::User() && Laravel\Jetstream\Jetstream::hasTeamFeatures())
-              <li>
-                <div class="dropdown-divider"></div>
-              </li>
-              <li>
-                <h6 class="dropdown-header">Manage Team</h6>
-              </li>
-              <li>
-                <div class="dropdown-divider"></div>
-              </li>
-              <li>
-                <a class="dropdown-item" href="{{ Auth::user() ? route('teams.show', Auth::user()->currentTeam->id) : 'javascript:void(0)' }}">
-                  <i class='ti ti-settings me-2'></i>
-                  <span class="align-middle">Team Settings</span>
-                </a>
-              </li>
-              @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
-              <li>
-                <a class="dropdown-item" href="{{ route('teams.create') }}">
-                  <i class='ti ti-user me-2'></i>
-                  <span class="align-middle">Create New Team</span>
-                </a>
-              </li>
-              @endcan
-              <li>
-                <div class="dropdown-divider"></div>
-              </li>
-              <lI>
-                <h6 class="dropdown-header">Switch Teams</h6>
-              </lI>
-              <li>
-                <div class="dropdown-divider"></div>
-              </li>
-              @if (Auth::user())
-              @foreach (Auth::user()->allTeams() as $team)
-              {{-- Below commented code read by artisan command while installing jetstream. !! Do not remove if you want to use jetstream. --}}
-
-              {{-- <x-jet-switchable-team :team="$team" /> --}}
-              @endforeach
-              @endif
-              @endif
-              <li>
+           
                 <div class="dropdown-divider"></div>
               </li>
               @if (Auth::check())

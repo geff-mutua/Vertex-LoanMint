@@ -92,14 +92,14 @@
       "slug": "collectionsheet",
       "submenu": [
         {
-          "url": "/admin/collections/daily",
+          "url": "/admin/collections/mpesa",
           "name": "Daily Collection Sheet",
-          "slug": "collectionsheet-daily"
+          "slug": "collections-mpesa-unmapped"
         },
         {
-          "url": "/admin/collections/missed",
+          "url": "/admin/collections/mpesa/unmapped",
           "name": "Missed Collection Sheet",
-          "slug": "collectionsheet-missed"
+          "slug": "collections-mpesa-unmapped"
         }
        
       ]

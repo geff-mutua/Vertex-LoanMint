@@ -90,11 +90,12 @@
                                 <th style="font-size: 10px">Reference</th>
 
                                 <th style="font-size: 10px">Loanee</th>
+                                <th style="font-size: 10px">Type</th>
                                 <th style="font-size: 10px">Loan Id</th>
                                 <th style="font-size: 10px">Date</th>
                                 <th style="font-size: 10px;text-align:right">Amount</th>
                                 <th style="font-size: 10px">Status</th>
-                                <th style="font-size: 10px">Action</th>
+                               
                     
                             </tr>
                         </thead>
@@ -110,6 +111,9 @@
                                     <td style="font-size:12px">
                                         {{ $item->loan->borrower->fullname() }}
                                         
+                                    </td>
+                                    <td style="font-size:12px">
+                                        {{ $item->transaction_type }}
                                     </td>
                                     <td style="font-size:12px">
                                         {{ $item->loan->transaction_code }}
@@ -136,16 +140,12 @@
                                     </td>
 
 
-                                    <td style="font-size:12px">
-                                        <small style="font-size:12px; cursor: pointer;" class="text-info"
-                                            data-bs-toggle="modal" wire:click="transactionDetails({{ $item->id }})"
-                                            data-bs-target="#transactionDetails">Details</small>
-                                    </td>
+                                  
 
-                                    @livewire('content.admin.collections.transactions.transaction-detail')
+                                    
                                 </tr>
 
-                            @empty
+                        @empty
                             @endforelse
                             <tr>
                                 <td colspan="4" style="text-align: right;font-weight:bold">TOTAL</td>
