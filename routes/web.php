@@ -34,7 +34,7 @@ Route::middleware('guest')->group(function (){
 });
 
 // Admin Routes
-Route::domain('{domain}.localhost')->group(function(){
+Route::domain('{domain}.'.env('SESSION_DOMAIN'))->group(function(){
     Route::middleware(['auth','company'])->group(function(){
         Route::prefix('admin')->group(function(){
             Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('dashboard');
@@ -74,7 +74,7 @@ Route::domain('{domain}.localhost')->group(function(){
     });
 });
 // PROJECT INIT SETTINGS
-Route::domain('{domain}.localhost')->group(function(){
+Route::domain('{domain}.'.env('SESSION_DOMAIN'))->group(function(){
     Route::middleware(['auth'])->group(function(){
         Route::prefix('admin')->group(function(){
             Route::get('/company-setting', [CompanySetting::class, 'index'])->name('setting-company');
