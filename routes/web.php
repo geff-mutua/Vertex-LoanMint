@@ -34,10 +34,10 @@ Route::middleware('guest')->group(function (){
 });
 
 // Admin Routes
-Route::domain('{domain}.'.env('SESSION_DOMAIN'))->group(function(){
+Route::domain('{domain}.localhost')->group(function(){
     Route::middleware(['auth','company'])->group(function(){
         Route::prefix('admin')->group(function(){
-            Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('dashboard');
+            Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('admin');
 
             // Client Routes
             Route::get('/clients', Borrowers::class)->name('clients-list');
@@ -74,7 +74,7 @@ Route::domain('{domain}.'.env('SESSION_DOMAIN'))->group(function(){
     });
 });
 // PROJECT INIT SETTINGS
-Route::domain('{domain}.'.env('SESSION_DOMAIN'))->group(function(){
+Route::domain('{domain}.localhost')->group(function(){
     Route::middleware(['auth'])->group(function(){
         Route::prefix('admin')->group(function(){
             Route::get('/company-setting', [CompanySetting::class, 'index'])->name('setting-company');
