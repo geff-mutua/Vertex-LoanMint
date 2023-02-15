@@ -242,8 +242,8 @@ const chartColors = {
         height: 390,
         type: 'donut'
       },
-      labels: <?=$data['branches']?>,
-      series: <?=$data['branch_loans']?>,
+      labels: [<?=$data['branches']?>],
+      series: [<?=$data['branch_loans']?>],
       colors: [
         chartColors.donut.series1,
         chartColors.donut.series4,
@@ -257,7 +257,7 @@ const chartColors = {
       dataLabels: {
         enabled: true,
         formatter: function (val, opt) {
-          return parseInt(val, 10) + '%';
+          return parseInt(val, 10) + '';
         }
       },
       legend: {
@@ -287,7 +287,7 @@ const chartColors = {
                 color: legendColor,
                 fontFamily: 'Open Sans',
                 formatter: function (val) {
-                  return parseInt(val, 10) + '%';
+                  return parseInt(val, 10) + '';
                 }
               },
               total: {

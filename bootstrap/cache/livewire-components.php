@@ -6,6 +6,7 @@
   'content.admin.collections.all-collections' => 'App\\Http\\Livewire\\Content\\Admin\\Collections\\AllCollections',
   'content.admin.collections.mpesa-collections' => 'App\\Http\\Livewire\\Content\\Admin\\Collections\\MpesaCollections',
   'content.admin.collections.mpesa-unmapped' => 'App\\Http\\Livewire\\Content\\Admin\\Collections\\MpesaUnmapped',
+  'content.admin.collections.sheets.daily-collection-sheet' => 'App\\Http\\Livewire\\Content\\Admin\\Collections\\Sheets\\DailyCollectionSheet',
   'content.admin.collections.transactions.transaction-detail' => 'App\\Http\\Livewire\\Content\\Admin\\Collections\\Transactions\\TransactionDetail',
   'content.admin.loans.active-loans' => 'App\\Http\\Livewire\\Content\\Admin\\Loans\\ActiveLoans',
   'content.admin.loans.arrear-loans' => 'App\\Http\\Livewire\\Content\\Admin\\Loans\\ArrearLoans',

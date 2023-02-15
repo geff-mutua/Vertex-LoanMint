@@ -8,22 +8,22 @@
     <form>
       <div class="mb-3">
         <label for="invoice-from" class="form-label">From</label>
-        <input type="text" class="form-control" id="invoice-from" value="shelbyComapny@email.com" placeholder="company@email.com" />
+        <input type="text" class="form-control" id="invoice-from" value="{{auth()->user()->email}}" placeholder="company@email.com" />
       </div>
       <div class="mb-3">
         <label for="invoice-to" class="form-label">To</label>
-        <input type="text" class="form-control" id="invoice-to" value="qConsolidated@email.com" placeholder="company@email.com" />
+        <input type="text" class="form-control" id="invoice-to" value="{{config('company.email')}}" placeholder="company@email.com" />
       </div>
       <div class="mb-3">
         <label for="invoice-subject" class="form-label">Subject</label>
-        <input type="text" class="form-control" id="invoice-subject" value="Invoice of purchased Admin Templates" placeholder="Invoice regarding goods" />
+        <input type="text" class="form-control" id="invoice-subject" value="Daily Collection Sheet" placeholder="Invoice regarding goods" />
       </div>
       <div class="mb-3">
         <label for="invoice-message" class="form-label">Message</label>
-        <textarea class="form-control" name="invoice-message" id="invoice-message" cols="3" rows="8">Dear Queen Consolidated,
-          Thank you for your business, always a pleasure to work with you!
-          We have generated a new invoice in the amount of $95.59
-          We would appreciate payment of this invoice by 05/11/2021</textarea>
+        <textarea class="form-control" name="invoice-message" id="invoice-message" cols="3" rows="8">Dear {{auth()->user()->name}},
+          Attached is the Daily Collection Sheet of loan repayments between
+          {{$date_from}} and {{$date_to}} from all branches totalling $95.59
+          </textarea>
       </div>
       <div class="mb-4">
         <span class="badge bg-label-primary">

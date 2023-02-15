@@ -21,6 +21,7 @@ use App\Http\Livewire\Content\Admin\Collections\AllCollections;
 use App\Http\Controllers\pages\admin\settings\theme\ThemeSetting;
 use App\Http\Livewire\Content\Admin\Collections\MpesaCollections;
 use App\Http\Controllers\pages\admin\settings\company\CompanySetting;
+use App\Http\Livewire\Content\Admin\Collections\Sheets\DailyCollectionSheet;
 use App\Http\Livewire\Content\Admin\Collections\Transactions\TransactionDetail;
 
 
@@ -34,7 +35,7 @@ Route::middleware('guest')->group(function (){
 });
 
 // Admin Routes
-Route::domain('{domain}.localhost')->group(function(){
+Route::domain('{domain}.'.env('SESSION_DOMAIN'))->group(function(){
     Route::middleware(['auth','company'])->group(function(){
         Route::prefix('admin')->group(function(){
             Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('admin');
@@ -63,6 +64,9 @@ Route::domain('{domain}.localhost')->group(function(){
             Route::get('/collections/mpesa',MpesaCollections::class)->name('collections-mpesa');
             Route::get('/collections/mpesa/unmapped',MpesaUnmapped::class)->name('collections-mpesa-unmapped');
 
+            //Sheets
+            Route::get('/collection/mpesa/daily',DailyCollectionSheet::class)->name('collection-sheet-daily');
+
             // Transactions
             Route::get('/transaction/details/{id}',TransactionDetail::class)->name('transaction-detail');
 
@@ -74,7 +78,7 @@ Route::domain('{domain}.localhost')->group(function(){
     });
 });
 // PROJECT INIT SETTINGS
-Route::domain('{domain}.localhost')->group(function(){
+Route::domain('{domain}.'.env('SESSION_DOMAIN'))->group(function(){
     Route::middleware(['auth'])->group(function(){
         Route::prefix('admin')->group(function(){
             Route::get('/company-setting', [CompanySetting::class, 'index'])->name('setting-company');

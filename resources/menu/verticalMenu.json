@@ -89,17 +89,17 @@
     {
       "name": "Collection Sheets",
       "icon": "menu-icon tf-icons ti ti-coin",
-      "slug": "collectionsheet",
+      "slug": "collection",
       "submenu": [
         {
-          "url": "/admin/collections/mpesa",
+          "url": "/admin/collection/mpesa/daily",
           "name": "Daily Collection Sheet",
-          "slug": "collections-mpesa-unmapped"
+          "slug": "collection-sheet-daily"
         },
         {
           "url": "/admin/collections/mpesa/unmapped",
           "name": "Missed Collection Sheet",
-          "slug": "collections-mpesa-unmapped"
+          "slug": "collection-mpesa-unmapped"
         }
        
       ]

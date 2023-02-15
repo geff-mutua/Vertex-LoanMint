@@ -22,6 +22,11 @@
         $('#approveLoan'+id).modal('hide');     
     });
 </script>
+<script>
+    window.livewire.on('branchUpdated',id => {
+        $('#editBranch'+id).modal('hide');     
+    });
+</script>
 
 <script>
     window.livewire.on('loanDeleted',id => {

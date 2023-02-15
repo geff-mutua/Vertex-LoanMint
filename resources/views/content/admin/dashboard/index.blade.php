@@ -48,7 +48,7 @@
                 <div class="badge rounded-pill bg-label-primary me-3 p-2"><i class="ti ti-chart-pie-2 ti-sm"></i></div>
                 <div class="card-info">
                   <h5 class="mb-0">{{number_format($data['total_disbursement'])}}</h5>
-                  <small>Loans Issued</small>
+                  <small>Total Issued</small>
                 </div>
               </div>
             </div>
@@ -57,7 +57,7 @@
                 <div class="badge rounded-pill bg-label-info me-3 p-2"><i class="ti ti-currency-dollar ti-sm"></i></div>
                 <div class="card-info">
                   <h5 class="mb-0">{{number_format($data['total_repayment'])}}</h5>
-                  <small>Repayments</small>
+                  <small>All Repayments</small>
                 </div>
               </div>
             </div>
@@ -66,7 +66,7 @@
                 <div class="badge rounded-pill bg-label-danger me-3 p-2"><i class="ti ti-shopping-cart ti-sm"></i></div>
                 <div class="card-info">
                   <h5 class="mb-0">{{number_format($data['loan_balance'])}}</h5>
-                  <small>Balances</small>
+                  <small>Total Balances</small>
                 </div>
               </div>
             </div>
@@ -75,7 +75,7 @@
                 <div class="badge rounded-pill bg-label-success me-3 p-2"><i class="ti ti-currency-dollar ti-sm"></i></div>
                 <div class="card-info">
                   <h5 class="mb-0">{{number_format($data['arrears'])}}</h5>
-                  <small>Loan Arrears</small>
+                  <small>Total Arrears</small>
                 </div>
               </div>
             </div>
@@ -114,7 +114,7 @@
           <h5 class="mb-0">Weekly Reports</h5>
           <small class="text-muted">Weekly Earnings Overview</small>
         </div>
-        <div class="dropdown">
+        {{-- <div class="dropdown">
           <button class="btn p-0" type="button" id="earningReportsId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="ti ti-dots-vertical ti-sm text-muted"></i>
           </button>
@@ -122,15 +122,15 @@
             <a class="dropdown-item" href="javascript:void(0);">View More</a>
             <a class="dropdown-item" href="javascript:void(0);">Delete</a>
           </div>
-        </div>
+        </div> --}}
         <!-- </div> -->
       </div>
       <div class="card-body">
         <div class="row">
           <div class="col-12 col-md-4 d-flex flex-column align-self-end">
             <div class="d-flex gap-2 align-items-center mb-2 pb-1 flex-wrap">
-              <h4 class="mb-0">Ksh {{$data['today_repayment']}}</h4>
-              <div class="badge rounded bg-label-success">+4.2%</div>
+              <h4 class="mb-0">Ksh {{number_format($data['weeklySum'])}}</h4>
+              <div class="badge rounded bg-label-success">+%</div>
             </div>
             <small class="text-muted">Statistics of the loan repayments</small>
           </div>
@@ -185,7 +185,7 @@
           <h5 class="mb-0">Loan Book Overview</h5>
           <small class="text-muted">Overall </small>
         </div>
-        <div class="dropdown">
+        {{-- <div class="dropdown">
           <button class="btn p-0" type="button" id="supportTrackerMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="ti ti-dots-vertical ti-sm text-muted"></i>
           </button>
@@ -193,7 +193,7 @@
             <a class="dropdown-item" href="javascript:void(0);">View More</a>
             <a class="dropdown-item" href="javascript:void(0);">Delete</a>
           </div>
-        </div>
+        </div> --}}
       </div>
       <div class="card-body">
         <div class="row">
@@ -217,13 +217,13 @@
                   <small class="text-muted">{{number_format($data['total_repayment'])}}</small>
                 </div>
               </li>
-              <li class="d-flex gap-3 align-items-center pb-1">
+              {{-- <li class="d-flex gap-3 align-items-center pb-1">
                 <div class="badge rounded bg-label-warning p-1"><i class="ti ti-clock ti-sm"></i></div>
                 <div>
                   <h6 class="mb-0 text-nowrap"></h6>
                   <small class="text-muted">1 Day</small>
                 </div>
-              </li>
+              </li> --}}
             </ul>
           </div>
           <div class="col-12 col-sm-8 col-md-12 col-lg-8">

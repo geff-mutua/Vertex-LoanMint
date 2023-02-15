@@ -62,7 +62,7 @@
                             <td><small class="text-xs">{{$branch->mobile}}</small></td>
                             <td><small class="text-xs">{{$branch->email}}</small></td>
                            <td>
-                            <button wire:click="editBranch({{$branch}})" class="text-warning btn btn-xs text-xs" data-bs-toggle="modal" data-bs-target="#editModal{{$branch->id}}">
+                            <button wire:click="editBranch({{$branch}})" class="text-warning btn btn-xs text-xs" data-bs-toggle="modal" data-bs-target="#editBranch{{$branch->id}}">
                                 Edit
                                 </button>
 

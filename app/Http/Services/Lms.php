@@ -34,8 +34,9 @@ class Lms
         'week_performance' => 0,
         'pending_disbursement'=>0,
         'recent_repayments' => [],
-        'branches'=>[],
-        'branch_loans'=>[]
+        'branches'=>null,
+        'branch_loans'=>null,
+        'weeklySum'=>0
     ];
     public $branches = [];
     public $loan_by_branches = [];
@@ -85,12 +86,16 @@ class Lms
         $this->branches = Branch::all()->each(function ($branch) {
             $this->loan_by_branches[$branch->branch_name] = 0;
         });
-        $this->data['branches']=Branch::pluck('name');
-        $this->data['branch_loans']=Branch::pluck('id');
-        // foreach ($branchIds as $key => $value) {
-        //     $result=(string)Transaction::where('branch_id',$value)->sum('amount');
-        //     array_push($this->data['branch_loans'],$result);
-        // }
+
+        $branches=Branch::pluck('name');
+        foreach ($branches as $key => $value1) {
+            $this->data['branches'] .= "'" . $value1 . "' ,";
+        }
+        $branchIds=Branch::pluck('id');
+        foreach ($branchIds as $key => $value) {
+            $result=(string)Transaction::where('branch_id',$value)->sum('amount');
+            $this->data['branch_loans'] .= "$result,";
+        }
 
         // Recent Transactions
         $this->data['recent_repayments']=Transaction::orderBy('id','DESC')->take(5)->get();
@@ -160,7 +165,13 @@ class Lms
         $this->data['clients']=Borrower::count();
 
         //Get the Total LoanBook Percentage
-        $this->data['loan_book_percent']=number_format((int)$this->data['loan_book']/(int)$this->data['total_disbursement'] * 100);
+        // dd((int)$this->data['total_disbursement']==0?'yes':'no');
+        if((int)$this->data['total_disbursement']==0){
+            $this->data['loan_book_percent']=(int)$this->data['loan_book']/1 * 100;
+        }else{
+            $this->data['loan_book_percent']=(int)$this->data['loan_book']/(int)$this->data['total_disbursement'] * 100;
+        }
+
 
         //Week Summary
         $weekMap = [
@@ -174,25 +185,34 @@ class Lms
         ];
         //Loop For ALL
         $dayOfTheWeek = Carbon::now()->dayOfWeek;
+        $weeklySum=0;
         if($dayOfTheWeek !==1){
             $weekMap[1]=(int)Transaction::where('date', Carbon::now()->subDays($dayOfTheWeek-1)->toDateString())->where('status','1')->sum('amount');
+            $weeklySum += (int)$weekMap[1];
            
         }if($dayOfTheWeek !==2){
             $weekMap[2]=(int)Transaction::where('date', Carbon::now()->subDays($dayOfTheWeek-2)->toDateString())->where('status','1')->sum('amount');
+            $weeklySum += (int)$weekMap[2];
         }if($dayOfTheWeek !==3){
             $weekMap[3]=(int)Transaction::where('date', Carbon::now()->subDays($dayOfTheWeek-3)->toDateString())->where('status','1')->sum('amount');
+            $weeklySum += (int)$weekMap[3];
         }if($dayOfTheWeek !==4){
             $weekMap[4]=(int)Transaction::where('date', Carbon::now()->subDays($dayOfTheWeek-4)->toDateString())->where('status','1')->sum('amount');
+            $weeklySum += (int)$weekMap[4];
         }if($dayOfTheWeek !==5){
             $weekMap[5]=(int)Transaction::where('date', Carbon::now()->subDays($dayOfTheWeek-5)->toDateString())->where('status','1')->sum('amount');
+            $weeklySum += (int)$weekMap[5];
         }if($dayOfTheWeek !==6){
             $weekMap[6]=(int)Transaction::where('date', Carbon::now()->subDays($dayOfTheWeek-6)->toDateString())->where('status','1')->sum('amount');
+            $weeklySum += (int)$weekMap[6];
         }if($dayOfTheWeek !==7){
             $weekMap[7]=(int)Transaction::where('date', Carbon::now()->subDays($dayOfTheWeek-7)->toDateString())->where('status','1')->sum('amount');
+            $weeklySum += (int)$weekMap[7];
         }
         $weekMap[$dayOfTheWeek]=(int)Transaction::where('date', Carbon::now()->subDays($dayOfTheWeek-$dayOfTheWeek)->toDateString())->where('status','1')->sum('amount');
         $this->data['week_performance']=$weekMap;
-
+        $weeklySum += (int)$weekMap[$dayOfTheWeek];
+        $this->data['weeklySum']=$weeklySum;
         return $this->data;
     }
 }

@@ -13,6 +13,7 @@ class CompanyBranch extends Component
     protected $rules = [
         'name' => 'required|min:1',
         'address' => 'required',
+    
     ];
 
     public function updated($propertyName)
@@ -23,6 +24,7 @@ class CompanyBranch extends Component
     public function store()
     {
         $this->validate();
+        
         Branch::updateOrCreate(['id' => $this->branch_id], [
             'name' => $this->name,
             'address' => $this->address,
@@ -30,9 +32,15 @@ class CompanyBranch extends Component
             'mobile'=>$this->mobile
         ]);
 
-        $this->emit('branchCreated');
+        if(is_null($this->branch_id)){
+            $this->emit('branchCreated');
+        }else{
+            $this->emit('branchUpdated',$this->branch_id);
+        }
         $this->name = null;
         $this->address = null;
+        $this->email=null;
+        $this->mobile=null;
 
     }
     public function editBranch(Branch $branch)
