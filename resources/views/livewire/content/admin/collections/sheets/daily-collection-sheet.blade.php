@@ -56,7 +56,7 @@
           <div class="col-xl-6 col-md-12 col-sm-5 col-12 mb-xl-0 mb-md-4 mb-sm-0 mb-4">
             <h6 class="mb-3">Daily Collection Sheet Report</h6>
                 <span>Branch:</span>
-              <span class="fw-semibold">{{$branches[$branch]['name']}} Branch (s)</span>
+              <span class="fw-semibold">{{$branch=="All"? ' All Branches':$branches[$branch]['name']}}</span>
           </div>
           <div class="col-xl-6 col-md-12 col-sm-7 col-12">
             
@@ -78,14 +78,68 @@
             </tr>
           </thead>
           <tbody>
-            @forelse ($collections as $item)
-                
+            @php
+              $total=0;
+              $approved=0;
+              $rejected=0;
+              $pending=0;
+            @endphp
+            @forelse ($collections as $collection)
+                <tr>
+                  <td>{{$collection->borrower->fullname()}}</td>
+                  <td>{{$collection->loan->borrower->officer->name}}</td>
+                  <td>{{$collection->loan->loanproduct->product_name}}</td>
+                  <td>{{$collection->branch->name}}</td>
+                  <td>{{number_format($collection->loan->total)}}</td>
+                  <td>{{number_format($collection->amount)}}</td>
+                  <td>{{$collection->date}}</td>
+                  @if ($collection->status=="0")
+                    @php
+                      $total+=$collection->amount;
+                      $pending+=$collection->amount;
+                    @endphp
+                  @elseif($collection->status=="1")
+                    @php
+                      $total+=$collection->amount;
+                      $approved+=$collection->amount;
+                    @endphp
+                    @elseif($collection->status=="2")
+                    @php
+                      $total+=$collection->amount;
+                      $rejected+=$collection->amount;
+                    @endphp
+                  @endif
+                </tr>
             @empty
                 
             <tr class="text-center">
                 <td colspan="7">No record Found</td>
             </tr>
             @endforelse
+            <tr>
+              <td colspan="3" class="align-top px-4 py-4">
+                <p class="mb-2 mt-3">
+                  <span class="ms-3 fw-semibold">Summary:</span>
+                  <span>Collection Report</span>
+                </p>
+                <p class="mb-2 mt-3">
+                  <span class="ms-3 fw-semibold">Prepared by:</span>
+                  <span>{{auth()->user()->name}}</span>
+                </p>
+              </td>
+              <td colspan="2" class="pe-3 py-4">
+                <p class="mb-2">Total Approved:</p>
+                <p class="mb-2 ">Total Pending:</p>
+                <p class="mb-2">Total Rejected:</p>
+                <p class="mb-0 pb-3">Total:</p>
+              </td>
+              <td colspan="2" class="ps-2 py-4">
+                <p class="fw-semibold mb-2">Ksh. {{number_format($approved)}}</p>
+                <p class="fw-semibold mb-2">Ksh. {{number_format($pending)}}</p>
+                <p class="fw-semibold mb-2">Ksh. {{number_format($rejected)}}</p>
+                <p class="fw-semibold mb-0 pb-3">Ksh. {{number_format($total)}}</p>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -121,10 +175,10 @@
 
         <div class="form-group mb-3">
             <label for="" class="form-label">Transaction Status </label>
-            <select name="" id="" class="form-control">
+            <select wire:model="status" id="" class="form-control">
                 <option value="All">All</option>
-                <option value="0">Pending</option>
                 <option value="1">Approved</option>
+                <option value="0">Pending</option>
                 <option value="2">Rejected</option>
             </select>
         </div>
@@ -141,10 +195,7 @@
             </select>
         </div>
 
-        <button class="btn btn-info d-grid w-100 mb-2">
-            <span class="d-flex align-items-center justify-content-center text-nowrap"><i class="ti ti-filter ti-xs me-1"></i>Filter Collections</span>
-          </button>
-        
+
 
         <button class="btn btn-primary d-grid w-100 mb-2" data-bs-toggle="offcanvas" data-bs-target="#sendInvoiceOffcanvas">
           <span class="d-flex align-items-center justify-content-center text-nowrap"><i class="ti ti-send ti-xs me-1"></i>Send Invoice</span>

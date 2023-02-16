@@ -255,11 +255,11 @@
                         </td>
                         <td class="align-middle text-center text-sm" style="font-size: 12px">
                             @if ($value->status == 'Active')
-                            <span class="text-xs badge bg-label-success">{{ $value->status }}</span>
+                            <span class="text-xs badge bg-label-warning">{{ $value->status }}</span>
                             @elseif($value->status == 'Rejected')
                             <span class="text-xs badge bg-label-danger">{{ $value->status }}</span>
                             @else
-                            <span class="text-xs badge bg-label-warning">{{ $value->status }}</span>
+                            <span class="text-xs badge bg-label-success">{{ $value->status }}</span>
                             @endif
 
                         </td>

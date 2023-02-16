@@ -167,9 +167,9 @@ class Lms
         //Get the Total LoanBook Percentage
         // dd((int)$this->data['total_disbursement']==0?'yes':'no');
         if((int)$this->data['total_disbursement']==0){
-            $this->data['loan_book_percent']=(int)$this->data['loan_book']/1 * 100;
+            $this->data['loan_book_percent']=number_format((int)$this->data['loan_book']/1 * 100);
         }else{
-            $this->data['loan_book_percent']=(int)$this->data['loan_book']/(int)$this->data['total_disbursement'] * 100;
+            $this->data['loan_book_percent']=number_format((int)$this->data['loan_book']/(int)$this->data['total_disbursement'] * 100);
         }
 
 

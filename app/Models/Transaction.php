@@ -15,4 +15,7 @@ class Transaction extends Model
     public function borrower(){
         return $this->belongsTo(Borrower::class);
     }
+    public function branch(){
+        return $this->belongsTo(Branch::class);
+    }
 }

@@ -12,7 +12,7 @@ class DailyCollectionSheet extends Component
     public $date_from,$date_to;
     public $recordId;
     public $branches=[];
-    public $total,$branch="1",$status="All";
+    public $total,$branch="All",$status="All";
     public $collections=[];
     public function mount(){
         $this->date_from=Carbon::now()->subDays(7)->format('Y-m-d');
@@ -24,7 +24,16 @@ class DailyCollectionSheet extends Component
     {
         if($this->branch=="All" && $this->status=="All"){
             $this->collections=Transaction::whereBetween('date',[$this->date_from,$this->date_to])->get();
+        }else{
+            if($this->status !='All' && $this->branch !='All'){
+                $this->collections=Transaction::whereBetween('date',[$this->date_from,$this->date_to])->where('status',$this->status)->where('branch_id',$this->branch)->get();
+            }elseif($this->status !='All'){
+                $this->collections=Transaction::whereBetween('date',[$this->date_from,$this->date_to])->where('status',$this->status)->get();
+            }else{
+                $this->collections=Transaction::whereBetween('date',[$this->date_from,$this->date_to])->where('branch_id',$this->branch)->get();
+            }
         }
+
         return view('livewire.content.admin.collections.sheets.daily-collection-sheet')->extends('layouts.layoutMaster');
     }
 }

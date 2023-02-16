@@ -136,7 +136,7 @@ class MPESAResponseController extends Controller
                                 # Put the transaction to Pending Transaction
                                 Transaction::create([
                                     'branch_id'=>$client->branch_id,
-                                    'domain_id'=>$client->domain_id,
+                                   
                                     'borrower_id'=>$client->id,
                                     'reference_code'=>$data->transaction_id,
                                     'transaction_type'=>'Processing Fee',
