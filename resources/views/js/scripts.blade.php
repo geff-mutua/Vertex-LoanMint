@@ -18,8 +18,18 @@
     });
 </script>
 <script>
+    window.livewire.on('loanEdited',() => {
+        $('#editLoan').modal('hide');     
+    });
+</script>
+<script>
     window.livewire.on('approveLoan',id => {
         $('#approveLoan'+id).modal('hide');     
+    });
+</script>
+<script>
+    window.livewire.on('disburse',() => {
+        $('#approveLoan').modal('hide');     
     });
 </script>
 <script>

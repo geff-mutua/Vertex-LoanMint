@@ -128,7 +128,7 @@ class MPESAResponseController extends Controller
                                     'name'=>$firstName.' '.$middleName.' '.$lastName,
                                     'borrower_id'=>$client->id,
                                     'loan_id'=>$loan->id,
-                                    'domain_id'=>$client->domain_id,
+                                    
                                 ]);
 
                              }else{
